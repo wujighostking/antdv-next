@@ -1,4 +1,4 @@
-import type { CSSObject } from '@ant-design/cssinjs'
+import type { CSSObject } from '@antdv-next/cssinjs'
 
 import type { AliasToken, PresetColorKey, TokenWithCommonCls } from '../internal'
 import { PresetColors } from '../interface'
