@@ -5,6 +5,7 @@ import type {
   PopupOverflow,
   ThemeConfig,
   Variant,
+  WaveConfig,
 } from './context.ts'
 import type { RenderEmptyHandler } from './defaultRenderEmpty'
 import type { SizeType } from './SizeContext.ts'
@@ -102,7 +103,7 @@ export interface ConfigProviderProps {
   // /**
   //  * Wave is special component which only patch on the effect of component interaction.
   //  */
-  // wave?: WaveConfig;
+  wave?: WaveConfig
   // tour?: TourConfig;
   // tooltip?: TooltipConfig;
   // popover?: PopoverConfig;

@@ -1,4 +1,4 @@
-import type { CSSProperties, SlotsType } from 'vue'
+import type { App, CSSProperties, SlotsType } from 'vue'
 import type { RenderNodeFn } from '../_util/type.ts'
 import type { ComponentBaseProps } from '../config-provider/context.ts'
 import type { SizeType } from '../config-provider/SizeContext.ts'
@@ -8,6 +8,7 @@ import { filterEmpty } from '@v-c/util/dist/props-util'
 import { toArray } from 'es-toolkit/compat'
 import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue'
 import { getSlotPropFn } from '../_util/tools.ts'
+import Wave from '../_util/wave'
 import { useComponentConfig, useConfig } from '../config-provider/context.ts'
 import { useDisabledContext } from '../config-provider/DisabledContext.tsx'
 import { useSize } from '../config-provider/hooks/useSize.ts'
@@ -205,7 +206,7 @@ const InternalCompoundedButton = defineComponent<
       const children = filterEmpty(slots?.default?.())
       const iconChildren = filterEmpty(toArray(getSlotPropFn(slots, props, 'icon')?.()))
       const needInserted = children.length === 1 && iconChildren.length === 0 && !isUnBorderedButtonVariant(mergedVariant.value)
-      if (needInserted && isTwoCNChar(buttonText)) {
+      if (needInserted && isTwoCNChar(buttonText.trim())) {
         if (!hasTwoCNChar.value) {
           hasTwoCNChar.value = true
         }
@@ -352,7 +353,7 @@ const InternalCompoundedButton = defineComponent<
         buttonAttrs.tabindex = attrTabIndex
       }
 
-      return wrapCSSVar(
+      let buttonNodes = (
         <button
           {...buttonAttrs}
           ref={buttonRef as any}
@@ -365,8 +366,12 @@ const InternalCompoundedButton = defineComponent<
           {iconNode}
           {kids}
           {compactItemClassnames.value ? <CompactStyle prefixCls={prefixCls.value} /> : null}
-        </button>,
+        </button>
       )
+      if (!isUnBorderedButtonVariant(mergedVariant.value)) {
+        buttonNodes = <Wave component="Button" disabled={innerLoading.value}>{buttonNodes}</Wave>
+      }
+      return wrapCSSVar(buttonNodes)
     }
   },
   {
@@ -374,3 +379,17 @@ const InternalCompoundedButton = defineComponent<
     inheritAttrs: false,
   },
 )
+type CompoundedComponent = typeof InternalCompoundedButton & {
+  /** @internal */
+  __ANT_BUTTON: boolean
+}
+
+const Button = InternalCompoundedButton as CompoundedComponent
+
+Button.__ANT_BUTTON = true
+
+;(Button as any).install = (app: App) => {
+  app.component(InternalCompoundedButton.name, Button)
+}
+
+export default Button

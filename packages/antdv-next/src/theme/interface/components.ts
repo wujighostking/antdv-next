@@ -1,4 +1,4 @@
-// import type { ComponentToken as WaveToken } from '../../_util/wave/style';
+import type { ComponentToken as WaveToken } from '../../_util/wave/style'
 import type { ComponentToken as AffixComponentToken } from '../../affix/style'
 import type { ComponentToken as AlertComponentToken } from '../../alert/style'
 // import type { ComponentToken as AnchorComponentToken } from '../../anchor/style';
@@ -132,6 +132,6 @@ export interface ComponentTokenMap {
   // QRCode?: QRCodeComponentToken;
   // App?: AppComponentToken;
   //
-  // /** @private Internal TS definition. Do not use. */
-  // Wave?: WaveToken;
+  /** @private Internal TS definition. Do not use. */
+  Wave?: WaveToken
 }

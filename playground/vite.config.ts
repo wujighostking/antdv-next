@@ -2,6 +2,7 @@ import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import Unocss from 'unocss/vite'
 import { defineConfig } from 'vite'
 import inspect from 'vite-plugin-inspect'
 
@@ -15,6 +16,7 @@ export default defineConfig({
     vueJsx(),
     vue(),
     inspect(),
+    Unocss(),
   ],
   server: {
     port: 3322,

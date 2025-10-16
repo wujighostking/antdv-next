@@ -1,5 +1,5 @@
 import type { VNodeChild } from 'vue'
-import { Fragment, Text, cloneVNode, createVNode, isVNode } from 'vue'
+import { cloneVNode, createVNode, Fragment, isVNode, Text } from 'vue'
 import { PresetColors } from '../theme/interface'
 
 const rxTwoCNChar = /^[\u4E00-\u9FA5]{2}$/
@@ -25,15 +25,15 @@ function splitCNCharsBySpace(child: VNodeChild, needInserted: boolean): VNodeChi
     if (child.type === Text) {
       const text = String(child.children ?? '')
       const content = isTwoCNChar(text) ? text.split('').join(SPACE) : text
-      return createVNode('span', { key: child.key }, content)
+      return createVNode('span', { key: (child as any).key }, content)
     }
 
     if (child.type === Fragment) {
-      return createVNode('span', { key: child.key }, child.children)
+      return createVNode('span', { key: (child as any).key }, child.children)
     }
 
     if (typeof child.type === 'string' && typeof child.children === 'string' && isTwoCNChar(child.children)) {
-      return cloneVNode(child, null, child.children.split('').join(SPACE))
+      return cloneVNode(child, null, (child as any).children?.split('')?.join?.(SPACE))
     }
 
     return child

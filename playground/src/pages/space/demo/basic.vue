@@ -4,9 +4,9 @@
 
 <template>
   <a-space>
-    <button>测试1</button>
-    <button>测试2</button>
-    <button>测试3</button>
+    <a-button>测试1</a-button>
+    <a-button>测试2</a-button>
+    <a-button>测试3</a-button>
   </a-space>
 </template>
 

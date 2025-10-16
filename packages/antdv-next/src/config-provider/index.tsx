@@ -27,6 +27,7 @@ const PASSED_PROPS: Exclude<
   'getTargetContainer',
   'getPopupContainer',
   'renderEmpty',
+  'wave',
   // 'input',
   // 'pagination',
   // 'form',

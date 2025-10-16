@@ -1,6 +1,8 @@
 export { default as Affix } from './affix'
 export type { AffixProps } from './affix'
 export { default as Alert } from './alert'
+export { default as Button } from './button'
+export type { ButtonColorType, ButtonHTMLType, ButtonProps, ButtonShape, ButtonSize, ButtonType, ButtonVariantType } from './button'
 export { default as ConfigProvider } from './config-provider'
 export { default as Space, SpaceCompact } from './space'
 export type { SpaceProps, SpaceSize, SpaceSlots } from './space'

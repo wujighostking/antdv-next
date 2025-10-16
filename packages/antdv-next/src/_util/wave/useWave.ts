@@ -1,0 +1,58 @@
+import type { Ref } from 'vue'
+import type { ShowWave, WaveComponent } from './interface'
+import raf from '@v-c/util/dist/raf'
+import { onBeforeUnmount, ref, unref } from 'vue'
+import { useConfig } from '../../config-provider/context.ts'
+import useToken from '../../theme/useToken'
+import { TARGET_CLS } from './interface'
+import showWaveEffect from './WaveEffect'
+
+export default function useWave(
+  nodeRef: Ref<HTMLElement | null | undefined>,
+  className: string | Ref<string>,
+  component?: WaveComponent | Ref<WaveComponent | undefined>,
+) {
+  const configCtx = useConfig()
+  const [, token, hashId] = useToken()
+
+  const showWave: ShowWave = (event) => {
+    const node = nodeRef.value
+    if (!node) {
+      return
+    }
+    const waveConfig = configCtx.value.wave
+    if (waveConfig?.disabled) {
+      return
+    }
+
+    const targetNode = node.querySelector<HTMLElement>(`.${TARGET_CLS}`) || node
+    const { showEffect } = waveConfig ?? {} as any
+
+    (showEffect || showWaveEffect)(targetNode, {
+      className: unref(className),
+      token: token.value,
+      component: unref(component) ?? undefined,
+      event,
+      hashId: hashId.value,
+    })
+  }
+
+  const rafId = ref<number>()
+
+  const showDebounceWave: ShowWave = (event) => {
+    if (rafId.value !== undefined) {
+      raf.cancel(rafId.value)
+    }
+    rafId.value = raf(() => {
+      showWave(event)
+    })
+  }
+
+  onBeforeUnmount(() => {
+    if (rafId.value !== undefined) {
+      raf.cancel(rafId.value)
+    }
+  })
+
+  return showDebounceWave
+}

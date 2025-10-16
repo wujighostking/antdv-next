@@ -170,6 +170,7 @@ export interface ConfigConsumerProps extends ConfigComponentProps {
   // popupOverflow?: PopupOverflow
   theme?: ThemeConfig
   // warning?: WarningContextProps
+  wave?: WaveConfig
 }
 
 const ConfigConsumerKey: InjectionKey<Ref<ConfigConsumerProps>> = Symbol('ConfigConsumerContext')
