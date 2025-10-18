@@ -91,6 +91,7 @@ export interface ButtonEmits {
 export interface ButtonSlots {
   default?: () => any
   icon?: () => any
+  loadingIcon?: () => any
 }
 
 const defaultButtonProps = {
@@ -176,7 +177,6 @@ const InternalCompoundedButton = defineComponent<
     watch(
       [() => loadingOrDelay.value.delay, () => loadingOrDelay.value.loading],
       async (_new, _old, onCleanup) => {
-        await nextTick()
         if (loadingOrDelay.value.delay > 0) {
           delayTimer = setTimeout(() => {
             delayTimer = null
@@ -275,9 +275,16 @@ const InternalCompoundedButton = defineComponent<
       )
       const iconClasses = classNames(componentCtx.value.classes?.icon, props.classes?.icon)
       const iconStyle = [componentCtx.value.styles?.icon, props.styles?.icon]
-      const loadingIconNode = loading && typeof loading === 'object' && loading.icon
-        ? (typeof loading.icon === 'function' ? loading.icon() : loading.icon)
-        : null
+      let loadingIconNode = null
+      const iconNodes = filterEmpty(slots?.loadingIcon?.())
+      if (iconNodes.length) {
+        loadingIconNode = innerLoading.value && iconNodes
+      }
+      else {
+        loadingIconNode = innerLoading.value && typeof loading === 'object' && loading.icon
+          ? (typeof loading.icon === 'function' ? loading.icon() : loading.icon)
+          : null
+      }
       const iconNode = hasIcon && !innerLoading.value
         ? (
             <IconWrapper
