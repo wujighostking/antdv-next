@@ -9,7 +9,7 @@ import { computed, defineComponent } from 'vue'
 import { pureAttrs, useMergeSemantic, useToArr } from '../_util/hooks/useMergeSemantic.ts'
 import { useOrientation } from '../_util/hooks/useOrientation.ts'
 import { toPropsRefs } from '../_util/tools.ts'
-import { useBaseConfig, useComponentBaseConfig, useComponentConfig } from '../config-provider/context.ts'
+import { useComponentBaseConfig } from '../config-provider/context.ts'
 import { useSize } from '../config-provider/hooks/useSize.ts'
 import useStyle from './style'
 
@@ -60,13 +60,17 @@ const defaultProps = {
 } as any
 const Divider = defineComponent<DividerProps>(
   (props = defaultProps, { slots, attrs }) => {
-    const componentCtx = useComponentConfig('divider')
-    const { classes: contextClassNames, styles: contextStyles } = useComponentBaseConfig('divider')
-    const { prefixCls, direction } = useBaseConfig('divider', props)
+    const {
+      class: contextClassName,
+      classes: contextClassNames,
+      styles: contextStyles,
+      direction,
+      prefixCls,
+    } = useComponentBaseConfig('divider', props)
+    const { type, vertical, orientation, classes, styles, size } = toPropsRefs(props, 'orientation', 'vertical', 'type', 'classes', 'styles', 'size')
     const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls)
-    const sizeFullName = useSize(computed(() => props.size))
+    const sizeFullName = useSize(size)
     const sizeCls = computed(() => sizeClassNameMap[sizeFullName.value!])
-    const { type, vertical, orientation, classes, styles } = toPropsRefs(props, 'orientation', 'vertical', 'type', 'classes', 'styles')
     const validTitlePlacement = computed(() => titlePlacementList.includes(orientation.value || ''))
     const mergedTitlePlacement = computed<'start' | 'end' | 'center'>(() => {
       const placement = props?.titlePlacement ?? (validTitlePlacement.value ? (orientation.value as TitlePlacement) : 'center')
@@ -124,7 +128,7 @@ const Divider = defineComponent<DividerProps>(
       const railCls = `${prefixCls.value}-rail`
       const classString = classNames(
         prefixCls.value,
-        componentCtx.value.class,
+        contextClassName?.value,
         hashId.value,
         cssVarCls.value,
         `${prefixCls.value}-${mergedOrientation.value}`,

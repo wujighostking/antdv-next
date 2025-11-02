@@ -1,15 +1,22 @@
 import type { AriaAttributes, SlotsType } from 'vue'
 import type { ClosableType } from '../_util/hooks/useClosable'
+import type { SemanticClassNamesType, SemanticStylesType } from '../_util/hooks/useMergeSemantic.ts'
 import type { SlotsDefineType, VueNode } from '../_util/type.ts'
 import type { ComponentBaseProps } from '../config-provider/context'
 import { CheckCircleFilled, CloseCircleFilled, CloseOutlined, ExclamationCircleFilled, InfoCircleFilled } from '@antdv-next/icons'
 import { classNames } from '@v-c/util'
 import { filterEmpty } from '@v-c/util/dist/props-util'
 import { computed, createVNode, defineComponent, shallowRef, Transition } from 'vue'
-import { getSlotPropFn, getSlotPropsFnRun } from '../_util/tools.ts'
+import { pureAttrs, useMergeSemanticNoRef } from '../_util/hooks/useMergeSemantic.ts'
+import { getSlotPropFn, getSlotPropsFnRun, toPropsRefs } from '../_util/tools.ts'
 import { replaceElement } from '../_util/vueNode.ts'
-import { useComponentConfig } from '../config-provider/context'
+import { useComponentBaseConfig } from '../config-provider/context'
 import useStyle from './style'
+
+export type AlertSemanticName = 'root' | 'icon' | 'section' | 'title' | 'description' | 'actions'
+
+export type AlertClassNamesType = SemanticClassNamesType<AlertProps, AlertSemanticName>
+export type AlertStylesType = SemanticStylesType<AlertProps, AlertSemanticName>
 
 export interface AlertProps extends ComponentBaseProps {
   /** Type of Alert styles, options:`success`, `info`, `warning`, `error` */
@@ -17,6 +24,10 @@ export interface AlertProps extends ComponentBaseProps {
   /** Whether Alert can be closed */
   closable?: ClosableType
   /** Content of Alert */
+  title?: VueNode
+  /**
+   * @deprecated please use `title` instead.
+   */
   message?: VueNode
   /** Additional content of Alert */
   description?: VueNode
@@ -26,6 +37,8 @@ export interface AlertProps extends ComponentBaseProps {
   showIcon?: boolean
   /** https://www.w3.org/TR/2014/REC-html5-20141028/dom.html#aria-role-attribute */
   role?: string
+  classes?: AlertClassNamesType
+  styles?: AlertStylesType
   banner?: boolean
   icon?: VueNode
   closeIcon?: VueNode
@@ -69,7 +82,7 @@ const alertDefaultProps = {
 } as any
 
 const IconNode = defineComponent<IconNodeProps>(
-  (props) => {
+  (props, { attrs }) => {
     return () => {
       const { type, prefixCls, icon } = props
       const iconType = iconMapFilled[type!] || null
@@ -77,12 +90,13 @@ const IconNode = defineComponent<IconNodeProps>(
       const iconNode = filterEmpty(typeof icon === 'function' ? icon() : icon)[0]
       if (iconNode) {
         return replaceElement(iconNode, <span class={[`${prefixCls}-icon`]}>{iconNode}</span>, () => ({
-          class: classNames(`${prefixCls}-icon`, iconNode?.props?.class),
+          class: classNames(iconNode?.props?.class, `${prefixCls}-icon`, (attrs as any).class),
+          style: attrs.style,
         }))
       }
       return createVNode(
         iconType,
-        { class: `${prefixCls}-icon` },
+        { class: `${prefixCls}-icon`, style: attrs.style },
       )
     }
   },
@@ -125,8 +139,17 @@ const Alert = defineComponent<
   SlotsType<AlertSlots>
 >(
   (props = alertDefaultProps, { slots, emit, attrs }) => {
-    const configContext = useComponentConfig('alert')
-    const prefixCls = computed(() => configContext.value?.getPrefixCls('alert', props.prefixCls))
+    const {
+      closable: contextClosable,
+      closeIcon: contextCloseIcon,
+      class: contextClassName,
+      style: contextStyle,
+      classes: contextClassNames,
+      styles: contextStyles,
+      direction,
+      prefixCls,
+    } = useComponentBaseConfig('alert', props, ['closable', 'closeIcon'])
+    const { classes, styles } = toPropsRefs(props, 'classes', 'styles')
     const closed = shallowRef(false)
     const internalRef = shallowRef<HTMLDivElement>()
     const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls)
@@ -170,14 +193,35 @@ const Alert = defineComponent<
         if (closeIcon !== false && closeIcon !== null && closeIcon !== undefined) {
           return true
         }
-        return !!configContext.value?.closable
+        return !!contextClosable.value
       }
       const isClosable = isClosableFn()
-      const message = getSlotPropsFnRun(slots, props, 'message')
+      let message = getSlotPropsFnRun(slots, props, 'message')
+      const title = getSlotPropsFnRun(slots, props, 'title')
+      if (title) {
+        message = title
+      }
       const description = getSlotPropsFnRun(slots, props, 'description')
       const action = getSlotPropsFnRun(slots, props, 'action')
       // banner mode defaults to Icon
       const isShowIcon = banner && showIcon === undefined ? true : showIcon
+
+      // =========== Merged Props for Semantic ==========
+      const mergedProps: AlertProps = {
+        ...props,
+        prefixCls: prefixCls.value,
+        type: type.value,
+        showIcon: isShowIcon,
+        closable: isClosable,
+      }
+      const [mergedClassNames, mergedStyles] = useMergeSemanticNoRef<
+        AlertClassNamesType,
+        AlertStylesType,
+        AlertProps
+      >([contextClassNames.value, classes.value], [contextStyles.value, styles.value], {
+        props: mergedProps,
+      })
+
       const alertCls = classNames(
         prefixCls.value,
         `${prefixCls.value}-${type.value}`,
@@ -185,10 +229,12 @@ const Alert = defineComponent<
           [`${prefixCls.value}-with-description`]: !!description,
           [`${prefixCls.value}-no-icon`]: !isShowIcon,
           [`${prefixCls.value}-banner`]: !!banner,
-          [`${prefixCls.value}-rtl`]: configContext.value?.direction === 'rtl',
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         },
-        configContext.value?.class,
+        contextClassName.value,
+        (attrs as any).class,
         rootClass,
+        mergedClassNames.root,
         cssVarCls.value,
         hashId.value,
       )
@@ -200,16 +246,15 @@ const Alert = defineComponent<
         if (closeIcon) {
           return closeIcon
         }
-        const contextClosable = configContext.value?.closable
-        if (typeof contextClosable === 'object' && contextClosable.closeIcon) {
-          return contextClosable.closeIcon
+        if (typeof contextClosable.value === 'object' && contextClosable.value) {
+          return contextClosable.value
         }
-        return configContext.value?.closeIcon
+        return contextCloseIcon.value
       }
       const mergedCloseIcon = mergedCloseIconFn()
 
       const mergedAriaPropsFn = () => {
-        const merged = closable ?? configContext.value?.closable
+        const merged = closable ?? contextClosable.value
         if (typeof merged === 'object') {
           const { closeIcon: _, ...ariaProps } = merged
           return ariaProps
@@ -234,13 +279,19 @@ const Alert = defineComponent<
                   ref={internalRef}
                   data-show={!closed.value}
                   role="alert"
-                  class={[alertCls, attrs.class]}
-                  style={[configContext.value?.style, (attrs as any).style]}
-                  {...attrs}
+                  class={alertCls}
+                  style={[
+                    mergedStyles.root,
+                    contextStyle.value,
+                    (attrs as any).style,
+                  ]}
+                  {...pureAttrs(attrs)}
                 >
                   {isShowIcon
                     ? (
                         <IconNode
+                          class={mergedClassNames.icon}
+                          style={mergedStyles.icon}
                           description={description}
                           icon={props.icon}
                           prefixCls={prefixCls.value}
@@ -248,11 +299,41 @@ const Alert = defineComponent<
                         />
                       )
                     : null}
-                  <div class={`${prefixCls.value}-content`}>
-                    {message ? <div class={`${prefixCls.value}-message`}>{message}</div> : null}
-                    {description ? <div class={`${prefixCls.value}-description`}>{description}</div> : null}
+                  <div
+                    class={[`${prefixCls.value}-section`, mergedClassNames.section]}
+                    style={mergedStyles.section}
+                  >
+                    {message
+                      ? (
+                          <div
+                            class={[`${prefixCls.value}-title`, mergedClassNames.title]}
+                            style={mergedStyles.title}
+                          >
+                            {message}
+                          </div>
+                        )
+                      : null}
+                    {description
+                      ? (
+                          <div
+                            class={[`${prefixCls.value}-description`, mergedClassNames.description]}
+                            style={mergedStyles.description}
+                          >
+                            {description}
+                          </div>
+                        )
+                      : null}
                   </div>
-                  {action ? <div class={`${prefixCls.value}-action`}>{action}</div> : null}
+                  {action
+                    ? (
+                        <div
+                          class={[`${prefixCls.value}-actions`, mergedClassNames.actions]}
+                          style={mergedStyles.actions}
+                        >
+                          {action}
+                        </div>
+                      )
+                    : null}
                   <CloseIconNode
                     isClosable={isClosable}
                     prefixCls={prefixCls.value}

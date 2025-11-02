@@ -158,7 +158,7 @@ export type ButtonConfig = ComponentStyleConfig
 
 export type FlexConfig = ComponentStyleConfig & Pick<FlexProps, 'vertical'>
 
-export type AlertConfig = ComponentStyleConfig & Pick<AlertProps, 'closable' | 'closeIcon'>
+export type AlertConfig = ComponentStyleConfig & Pick<AlertProps, 'closable' | 'closeIcon' | 'classes' | 'styles'>
 
 export type BadgeConfig = ComponentStyleConfig & Pick<BadgeProps, 'classes' | 'styles'>
 
@@ -339,13 +339,45 @@ export function useComponentConfig<T extends keyof ConfigComponentProps>(propNam
   })
 }
 
-export function useComponentBaseConfig<T extends keyof ConfigComponentProps>(propName: T) {
+export function useComponentBaseConfig<
+  T extends keyof ConfigComponentProps,
+  K extends keyof NonNullable<ConfigComponentProps[T]> = keyof NonNullable<ConfigComponentProps[T]>,
+>(propName: T, props?: ComponentBaseProps, keys?: readonly K[], suffixCls?: string) {
   const context = useConfig()
   const propValue = computed(() => {
-    return context.value[propName] as { classes?: any, styles?: any } & ConfigConsumerProps[T]
+    return context.value[propName] as { classes?: any, styles?: any } & ConfigComponentProps[T]
   })
+  const toRefs = <TValue>(propValues: Ref<TValue>) => {
+    const result: any = {
+      classes: computed(() => EMPTY_OBJECT),
+      styles: computed(() => EMPTY_OBJECT),
+      class: computed(() => undefined),
+      style: computed(() => undefined),
+    }
+    const __keys = Object.keys(result)
+    for (const key in propValues.value) {
+      if (__keys.includes(key)) {
+        result[key] = computed(() => propValues.value[key] ?? EMPTY_OBJECT)
+      }
+      else {
+        result[key] = computed(() => propValues.value[key])
+      }
+    }
+    if (keys && keys.length) {
+      keys.forEach((key) => {
+        if (!result[key]) {
+          result[key] = computed(() => propValues.value?.[key])
+        }
+      })
+    }
+    return result as { [Key in keyof TValue]-?: Ref<TValue[Key]> }
+  }
+  const refsData = toRefs(propValue)
   return {
-    classes: computed(() => propValue.value?.classes || EMPTY_OBJECT),
-    styles: computed(() => propValue.value?.styles || EMPTY_OBJECT),
+    ...refsData,
+    direction: computed(() => context.value.direction),
+    prefixCls: computed(() => {
+      return context.value?.getPrefixCls(propName ?? suffixCls, props?.prefixCls)
+    }),
   }
 }

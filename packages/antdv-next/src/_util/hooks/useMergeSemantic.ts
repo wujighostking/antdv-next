@@ -142,6 +142,41 @@ export function useMergeSemantic<
   return [computed(() => _merged.value[0]), computed(() => _merged.value[1])] as const
 }
 
+export function useMergeSemanticNoRef<
+  ClassNamesType extends AnyObject,
+  StylesType extends AnyObject,
+  Props extends AnyObject,
+>(
+  classNamesList: MaybeFn<ClassNamesType, Props>[],
+  stylesList: MaybeFn<StylesType, Props>[],
+  info: { props: Props },
+  schema?: SemanticSchema,
+) {
+  const resolvedClassNamesList = classNamesList.map(classNames =>
+    classNames ? resolveStyleOrClass(classNames, info) : undefined,
+  )
+
+  const resolvedStylesList = stylesList.map(styles =>
+    styles ? resolveStyleOrClass(styles, info) : undefined,
+  )
+
+  const mergedClassNames = useSemanticClassNames(
+    schema,
+    ...resolvedClassNamesList,
+  ) as ObjectOnly<ClassNamesType>
+
+  const mergedStyles = useSemanticStyles(...resolvedStylesList) as ObjectOnly<StylesType>
+  const fn = () => {
+    if (!schema) {
+      return [mergedClassNames, mergedStyles] as const
+    }
+    return [
+      fillObjectBySchema<ObjectOnly<ClassNamesType>>(mergedClassNames, schema),
+      fillObjectBySchema<ObjectOnly<StylesType>>(mergedStyles, schema),
+    ] as const
+  }
+  return fn()
+}
 export function useToArr<T = any>(...args: Ref<T | undefined>[]) {
   return computed(() => args.map(unref))
 }
