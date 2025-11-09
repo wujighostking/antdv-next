@@ -71,3 +71,5 @@ function initCollapseMotion(rootCls = defaultPrefixCls, appear = true): Transiti
 }
 
 export default initCollapseMotion
+
+export type CssUtil = any
