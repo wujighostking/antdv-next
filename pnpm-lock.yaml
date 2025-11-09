@@ -233,11 +233,11 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7(vue@3.5.24(typescript@5.9.3))
       '@v-c/tooltip':
-        specifier: ^0.0.12
-        version: 0.0.12(vue@3.5.24(typescript@5.9.3))
+        specifier: ^0.0.13
+        version: 0.0.13(vue@3.5.24(typescript@5.9.3))
       '@v-c/trigger':
-        specifier: ^0.0.12
-        version: 0.0.12(vue@3.5.24(typescript@5.9.3))
+        specifier: ^0.0.13
+        version: 0.0.13(vue@3.5.24(typescript@5.9.3))
       '@v-c/util':
         specifier: 0.0.13
         version: 0.0.13(vue@3.5.24(typescript@5.9.3))
@@ -1550,13 +1550,13 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  '@v-c/tooltip@0.0.12':
-    resolution: {integrity: sha512-XJUC/fKrvxH2TH4mrwyXlRhU1hbgas38O/GFbt6L285nnmqle+Tx742GDxrxgW1E5BzcALTVGAVQ6Z6dJ3PrKQ==}
+  '@v-c/tooltip@0.0.13':
+    resolution: {integrity: sha512-aWZlH9l6+cKXR4z6gKM1yTRFA1tUIFaaaZ0PcERus3tjmtgktAnAWBsJW+PIcOkR9B3X8IyDovIcVBlrPDnA9g==}
     peerDependencies:
       vue: ^3.0.0
 
-  '@v-c/trigger@0.0.12':
-    resolution: {integrity: sha512-cIme5SBzC/Nty8yZt+5OymomG1oOO+w21DXVhA52Om1xYlTOJuGN8LNa3ZflsxsCaYdpWvpqoe7LoUh0VJhOpA==}
+  '@v-c/trigger@0.0.13':
+    resolution: {integrity: sha512-kJnBjSLVssRbZVfxTLwA1RxC+hTQQOV7ZNGM9K7a4aex7S/e6JHFn9sOeZg+zg1NhM83hi95HDGsc0glDEorgQ==}
     peerDependencies:
       vue: ^3.0.0
 
@@ -5014,13 +5014,13 @@ snapshots:
       '@v-c/util': 0.0.13(vue@3.5.24(typescript@5.9.3))
       vue: 3.5.24(typescript@5.9.3)
 
-  '@v-c/tooltip@0.0.12(vue@3.5.24(typescript@5.9.3))':
+  '@v-c/tooltip@0.0.13(vue@3.5.24(typescript@5.9.3))':
     dependencies:
-      '@v-c/trigger': 0.0.12(vue@3.5.24(typescript@5.9.3))
+      '@v-c/trigger': 0.0.13(vue@3.5.24(typescript@5.9.3))
       '@v-c/util': 0.0.13(vue@3.5.24(typescript@5.9.3))
       vue: 3.5.24(typescript@5.9.3)
 
-  '@v-c/trigger@0.0.12(vue@3.5.24(typescript@5.9.3))':
+  '@v-c/trigger@0.0.13(vue@3.5.24(typescript@5.9.3))':
     dependencies:
       '@v-c/portal': 0.0.4(vue@3.5.24(typescript@5.9.3))
       '@v-c/resize-observer': 0.0.3(vue@3.5.24(typescript@5.9.3))
