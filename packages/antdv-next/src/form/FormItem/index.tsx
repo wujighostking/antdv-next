@@ -1,10 +1,14 @@
 import type { SlotsType } from 'vue'
 import type { ComponentBaseProps } from '../../config-provider/context'
 import type { FormItemLayout } from '../Form'
-import type { FormItemInputProps } from '../FormItemInput.tsx'
+import type { FormItemInputProps } from '../FormItemInput'
 import type { FormItemLabelProps, LabelTooltipType } from '../FormItemLabel'
-import type { Meta, Rule } from '../types'
-import { defineComponent } from 'vue'
+import type { InternalNamePath, Meta, Rule } from '../types'
+import { computed, defineComponent, shallowRef } from 'vue'
+import { useComponentBaseConfig } from '../../config-provider/context'
+import useCSSVarCls from '../../config-provider/hooks/useCSSVarCls'
+import { useFormContext, useNoStyleItemContext } from '../context.tsx'
+import useStyle from '../style'
 
 const NAME_SPLIT = '__SPLIT__'
 
@@ -94,13 +98,37 @@ const InternalFormItem = defineComponent<
   string,
   SlotsType<FormItemSlots>
 >(
-  () => {
+  (props) => {
+    const formContext = useFormContext()
+    const mergedValidateTrigger = computed(() => {
+      const { validateTrigger } = props
+      return validateTrigger !== undefined
+        ? validateTrigger
+        : formContext.value?.validateTrigger
+    })
+    const { prefixCls } = useComponentBaseConfig('form', props)
+    const notifyParentMetaChange = useNoStyleItemContext()
+    const hasName = computed(() => !(props.name === undefined || props.name === null))
+    // Style
+    const rootCls = useCSSVarCls(prefixCls)
+    const [hashId, cssVarCls] = useStyle(prefixCls, rootCls)
+
+    // ========================= MISC =========================
+    // Get `noStyle` required info
+    const fieldKeyPathRef = shallowRef<InternalNamePath>()
+
+    // ======================== Errors ========================
+    // >>>>> Collect sub field errors
+    //   const subFieldErrors =
+
     return () => {
       return null
     }
   },
+  {
+    name: 'AFormItem',
+    inheritAttrs: false,
+  },
 )
 
-const FormItem = InternalFormItem
-
-export default FormItem
+export default InternalFormItem

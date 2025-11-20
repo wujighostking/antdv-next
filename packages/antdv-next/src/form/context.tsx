@@ -24,6 +24,10 @@ export interface FormContextProps {
   // itemRef: (name: (string | number)[]) => (node: React.ReactElement) => void;
   // form?: FormInstance;
   feedbackIcons?: FeedbackIcons
+  model?: Record<string, any>
+  validateTrigger?: string | string[] | false
+  preserve?: boolean
+  clearOnDestroy?: boolean
 }
 
 const FormContextKey = Symbol('FormContextKey')

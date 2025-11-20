@@ -51,6 +51,10 @@ export interface FormProps extends ComponentBaseProps {
   requiredMark?: RequiredMark
   variant?: Variant
   validateMessages?: ValidateMessages
+  model?: Record<string, any>
+  validateTrigger?: string | string[] | false
+  preserve?: boolean
+  clearOnDestroy?: boolean
 }
 
 export interface FormEmits {
@@ -123,7 +127,18 @@ const InternalForm = defineComponent<
 
     const formContextValue = computed(() => {
       return {
-        ...pick(props, ['name', 'labelAlign', 'labelCol', 'labelWrap', 'wrapperCol', 'layout']),
+        ...pick(props, [
+          'name',
+          'labelAlign',
+          'labelCol',
+          'labelWrap',
+          'wrapperCol',
+          'layout',
+          'model',
+          'validateTrigger',
+          'preserve',
+          'clearOnDestroy',
+        ]),
         colon: mergedColon.value,
         requiredMark: mergedRequiredMark.value,
         classes: mergedClassNames.value,
