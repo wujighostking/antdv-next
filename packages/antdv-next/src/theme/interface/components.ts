@@ -41,7 +41,7 @@ import type { ComponentToken as PopconfirmComponentToken } from '../../popconfir
 import type { ComponentToken as PopoverComponentToken } from '../../popover/style'
 // import type { ComponentToken as ProgressComponentToken } from '../../progress/style';
 import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style'
-// import type { ComponentToken as RadioComponentToken } from '../../radio/style';
+import type { ComponentToken as RadioComponentToken } from '../../radio/style'
 // import type { ComponentToken as RateComponentToken } from '../../rate/style';
 import type { ComponentToken as ResultComponentToken } from '../../result/style'
 import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style'
@@ -104,7 +104,7 @@ export interface ComponentTokenMap {
   Popover?: PopoverComponentToken
   Popconfirm?: PopconfirmComponentToken
   // Rate?: RateComponentToken;
-  // Radio?: RadioComponentToken;
+  Radio?: RadioComponentToken
   Result?: ResultComponentToken
   Segmented?: SegmentedComponentToken
   // Select?: SelectComponentToken;
