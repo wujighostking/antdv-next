@@ -1,4 +1,5 @@
 import type { FullToken, GenerateStyle } from '../../theme/internal'
+import { genStyleHooks } from '../../theme/internal'
 
 /** Component only token. Which will handle additional calculation of alias token */
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
@@ -13,6 +14,8 @@ const genSpaceCompactStyle: GenerateStyle<SpaceToken> = (token) => {
 
   return {
     [componentCls]: {
+      'display': 'inline-flex',
+
       '&-block': {
         display: 'flex',
         width: '100%',
@@ -20,9 +23,22 @@ const genSpaceCompactStyle: GenerateStyle<SpaceToken> = (token) => {
       '&-vertical': {
         flexDirection: 'column',
       },
+
+      '&-rtl': {
+        direction: 'rtl',
+      },
     },
   }
 }
 
 // ============================== Export ==============================
-export default genSpaceCompactStyle
+export default genStyleHooks(
+  ['Space', 'Compact'],
+  token => [genSpaceCompactStyle(token)],
+  () => ({}),
+  {
+    // Space component don't apply extra font style
+    // https://github.com/ant-design/ant-design/issues/40315
+    resetStyle: false,
+  },
+)

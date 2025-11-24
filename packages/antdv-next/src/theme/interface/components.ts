@@ -27,7 +27,7 @@ import type { ComponentToken as FormComponentToken } from '../../form/style'
 import type { ComponentToken as GridComponentToken } from '../../grid/style'
 // import type { ComponentToken as ImageComponentToken } from '../../image/style';
 // import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
-// import type { ComponentToken as InputComponentToken } from '../../input/style';
+import type { ComponentToken as InputComponentToken } from '../../input/style'
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style'
 import type { ComponentToken as MasonryComponentToken } from '../../masonry/style'
 // import type { ComponentToken as ListComponentToken } from '../../list/style';
@@ -94,7 +94,7 @@ export interface ComponentTokenMap {
   Form?: FormComponentToken
   Grid?: GridComponentToken
   // Image?: ImageComponentToken;
-  // Input?: InputComponentToken;
+  Input?: InputComponentToken
   // InputNumber?: InputNumberComponentToken;
   Layout?: LayoutComponentToken
   // List?: ListComponentToken;

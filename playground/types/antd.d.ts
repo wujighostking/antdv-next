@@ -10,6 +10,7 @@ declare module 'vue' {
     ASpace: typeof import('antdv-next')['Space']
     ADivider: typeof import('antdv-next')['Divider']
     ASpaceCompact: typeof import('antdv-next')['SpaceCompact']
+    ASpaceAddon: typeof import('antdv-next')['SpaceAddon']
     AFlex: typeof import('antdv-next')['Flex']
     AConfigProvider: typeof import('antdv-next')['ConfigProvider']
     ACol: typeof import('antdv-next')['Col']

@@ -10,6 +10,7 @@ import { isPresetSize, isValidGapNumber } from '../_util/gapSize.ts'
 import { pureAttrs, useMergeSemantic, useOrientation, useToArr, useToProps } from '../_util/hooks'
 import { getSlotPropFn, toPropsRefs } from '../_util/tools.ts'
 import { useComponentBaseConfig } from '../config-provider/context.ts'
+import Addon from './Addon.tsx'
 import Compact from './Compact.tsx'
 import { useSpaceContextProvider } from './context.ts'
 import Item from './Item.tsx'
@@ -192,7 +193,9 @@ const Space = InternalSpace
 ;(Space as any).install = (app: App) => {
   app.component(InternalSpace.name, Space)
   app.component(Compact.name, Compact)
+  app.component(Addon.name, Addon)
 }
 
 export default Space
 export const SpaceCompact = Compact
+export const SpaceAddon = Addon
