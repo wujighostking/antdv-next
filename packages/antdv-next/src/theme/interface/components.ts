@@ -26,7 +26,7 @@ import type { ComponentToken as FloatButtonComponentToken } from '../../float-bu
 import type { ComponentToken as FormComponentToken } from '../../form/style'
 import type { ComponentToken as GridComponentToken } from '../../grid/style'
 // import type { ComponentToken as ImageComponentToken } from '../../image/style';
-// import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
+import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style'
 import type { ComponentToken as InputComponentToken } from '../../input/style'
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style'
 import type { ComponentToken as MasonryComponentToken } from '../../masonry/style'
@@ -95,7 +95,7 @@ export interface ComponentTokenMap {
   Grid?: GridComponentToken
   // Image?: ImageComponentToken;
   Input?: InputComponentToken
-  // InputNumber?: InputNumberComponentToken;
+  InputNumber?: InputNumberComponentToken
   Layout?: LayoutComponentToken
   // List?: ListComponentToken;
   // Mentions?: MentionsComponentToken;
