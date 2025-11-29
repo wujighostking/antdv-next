@@ -45,7 +45,7 @@ export interface TextAreaProps
     | 'onBlur'
     | 'onCompositionStart'
     | 'onCompositionEnd'
-    | 'onKeyDown'
+    | 'onKeydown'
     | 'onPressEnter'
     | 'onResize'
   > {
@@ -78,7 +78,7 @@ export interface TextAreaSlots {
   default?: () => any
 }
 
-const omitKeys: (keyof TextAreaProps)[] = [
+const omitKeys: string[] = [
   'classes',
   'styles',
   'rootClass',
@@ -89,6 +89,7 @@ const omitKeys: (keyof TextAreaProps)[] = [
   'variant',
   'prefixCls',
   'allowClear',
+  'onKeydown',
 ]
 
 const InternalTextArea = defineComponent<

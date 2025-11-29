@@ -263,8 +263,8 @@ importers:
         specifier: ^0.0.1
         version: 0.0.1(vue@3.5.24(typescript@5.9.3))
       '@v-c/textarea':
-        specifier: link:/Users/zhuzhengjian/workspace/gitea/antdv-next/vue-components/packages/textarea
-        version: link:../../../vue-components/packages/textarea
+        specifier: ^0.0.8
+        version: 0.0.8(vue@3.5.24(typescript@5.9.3))
       '@v-c/tooltip':
         specifier: ^1.0.0
         version: 1.0.0(vue@3.5.24(typescript@5.9.3))
@@ -1574,6 +1574,11 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
+  '@v-c/input@0.0.2':
+    resolution: {integrity: sha512-AL5bRTO00CkA7vJZ+JS5sNgy/zrfmQWe4dRUoyZf/RWlVF/OWLnOr/rENKfQa6t4hFgcObt28YtCZewG3+KrPQ==}
+    peerDependencies:
+      vue: ^3.0.0
+
   '@v-c/menu@1.0.0':
     resolution: {integrity: sha512-k28vPfAzSWuwm0EZroroGa/tvcv6lWo4YROT3YfRkeZo3u3bCuvvHXh7a3iaMKebiN/2mmT8bMXzNC+lb4Ls3w==}
     peerDependencies:
@@ -1629,6 +1634,11 @@ packages:
 
   '@v-c/switch@0.0.1':
     resolution: {integrity: sha512-TP0rJaHrsBMNrIblBgVOFdeKCJHEnNn0VVDp7CCTHna5OIXJ7jrbpqSCctH6/wQGZx44J6i7kyPUm5QwhYZHWw==}
+    peerDependencies:
+      vue: ^3.0.0
+
+  '@v-c/textarea@0.0.8':
+    resolution: {integrity: sha512-E4CNGy+S9sEg3kPdFKQ+jI0cIXQ8sZoCKYtCKK9feQS/dlF1MKZc2Rokpmuwtjr/d1JgIDRsP3jgpxv6IGIbKw==}
     peerDependencies:
       vue: ^3.0.0
 
@@ -5087,6 +5097,11 @@ snapshots:
       '@v-c/util': 1.0.1(vue@3.5.24(typescript@5.9.3))
       vue: 3.5.24(typescript@5.9.3)
 
+  '@v-c/input@0.0.2(vue@3.5.24(typescript@5.9.3))':
+    dependencies:
+      '@v-c/util': 1.0.1(vue@3.5.24(typescript@5.9.3))
+      vue: 3.5.24(typescript@5.9.3)
+
   '@v-c/menu@1.0.0(vue@3.5.24(typescript@5.9.3))':
     dependencies:
       '@v-c/overflow': 1.0.0(vue@3.5.24(typescript@5.9.3))
@@ -5148,6 +5163,13 @@ snapshots:
 
   '@v-c/switch@0.0.1(vue@3.5.24(typescript@5.9.3))':
     dependencies:
+      '@v-c/util': 1.0.1(vue@3.5.24(typescript@5.9.3))
+      vue: 3.5.24(typescript@5.9.3)
+
+  '@v-c/textarea@0.0.8(vue@3.5.24(typescript@5.9.3))':
+    dependencies:
+      '@v-c/input': 0.0.2(vue@3.5.24(typescript@5.9.3))
+      '@v-c/resize-observer': 1.0.0(vue@3.5.24(typescript@5.9.3))
       '@v-c/util': 1.0.1(vue@3.5.24(typescript@5.9.3))
       vue: 3.5.24(typescript@5.9.3)
 
