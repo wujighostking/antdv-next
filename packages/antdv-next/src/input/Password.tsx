@@ -21,9 +21,12 @@ export interface PasswordProps extends Omit<BaseInputProps, 'type'> {
   visibilityToggle?: VisibilityToggle
   suffix?: VueNode
   iconRender?: (params: { visible: boolean }) => any
+  iconVisible?: boolean
 }
 
-export interface PasswordEmits extends BaseInputEmits {}
+export interface PasswordEmits extends BaseInputEmits {
+  'update:iconVisible': (visible: boolean) => void
+}
 
 export interface PasswordSlots {
   prefix?: () => any
@@ -84,9 +87,9 @@ const InternalPassword = defineComponent<
     const action = computed<PasswordAction>(() => props.action ?? 'click')
 
     const iconRender = (visible: boolean) => {
-      const _iconRender = slots.iconRender || props.iconRender
+      const _iconRender = getSlotPropsFnRun(slots, props, 'iconRender', true, { visible })
       if (_iconRender) {
-        return _iconRender({ visible })
+        return _iconRender
       }
       return defaultIconRender(visible)
     }
@@ -161,7 +164,9 @@ const InternalPassword = defineComponent<
           onCompositionend={e => emit('compositionEnd', e)}
           onKeydown={e => emit('keydown', e)}
           onKeyup={e => emit('keyup', e)}
-          v-slots={slots}
+          v-slots={{
+            ...omit(slots, ['suffix', 'iconRender']),
+          }}
           {...{
             'onUpdate:value': handleUpdateValue,
           }}

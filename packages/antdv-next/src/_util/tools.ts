@@ -12,10 +12,10 @@ export function getSlotPropFn(slots: any, props: any, key: string) {
   return () => [fn]
 }
 
-export function getSlotPropsFnRun(slots: any, props: any, key: string, isNull = true) {
+export function getSlotPropsFnRun(slots: any, props: any, key: string, isNull = true, params?: any) {
   const fn = getSlotPropFn(slots, props, key)
   if (typeof fn === 'function') {
-    let node = fn?.()
+    let node = fn?.(params)
     if (!Array.isArray(node)) {
       node = [node]
     }
