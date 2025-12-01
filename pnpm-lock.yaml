@@ -466,6 +466,9 @@ importers:
       unocss:
         specifier: 'catalog:'
         version: 66.5.5(postcss@8.5.6)(rolldown-vite@7.2.7(@types/node@24.10.0)(esbuild@0.25.11)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1))
+      vite:
+        specifier: npm:rolldown-vite@7.2.7
+        version: rolldown-vite@7.2.7(@types/node@24.10.0)(esbuild@0.25.11)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1)
 
 packages:
 
