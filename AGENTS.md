@@ -27,31 +27,30 @@
 
 ## 🧩 Props / Attrs / Class Mapping
 
-| Ant Design (React) | Vue Adaptation | Description |
-|--------------------|----------------|--------------|
-| `className` | from `attrs.class` | Not exposed in props |
-| `style` | from `attrs.style` | Not exposed in props |
-| `rootClassName` | `rootClass` | Root container class |
-| `classNames` | `classes` | Sub-element class collection |
-| `children` | `slots.default` | Replaced by Vue slots |
-| `on*` props | `emits` | All events defined in emits only |
-| render-type props | `RenderNodeFn` + slot dual-mode | Standardized render function contract |
+| Ant Design (React) | Vue Adaptation             | Description |
+|--------------------|----------------------------|--------------|
+| `className` | from `attrs.class`         | Not exposed in props |
+| `style` | from `attrs.style`         | Not exposed in props |
+| `rootClassName` | `rootClass`                | Root container class |
+| `classNames` | `classes`                  | Sub-element class collection |
+| `children` | `slots.default`            | Replaced by Vue slots |
+| `on*` props | `emits`                    | All events defined in emits only |
+| render-type props | `VueNode` + slot dual-mode | Standardized render function contract |
 
 > ✅ **Attrs precedence:**
 > Always merge `attrs.class` and `attrs.style` last to preserve user overrides.
 
-## 🎨 Render Function (RenderNodeFn) Convention
+## 🎨 Render Function (VueNode) Convention
 
 - Import definition:
   ```ts
-  import type { RenderNodeFn } from '../_util/type.ts'
+  import type { VueNode } from '../_util/type.ts'
   ```
 - Generate a rendering function using:
   ```ts
-  import { getSlotPropFn } from '../_util/tools.ts'
+  import { getSlotPropFnRun } from '../_util/tools.ts'
 
-  const iconFn = getSlotPropFn(slots, props, 'icon')
-  const iconVNode = filterEmpty(iconFn?.({ size: 16 }) ?? [])
+  const iconVNode = getSlotPropFnRun(slots, props, 'icon')
   ```
 - **Slot takes priority** → fallback to prop → fallback to `null`.
 - Clean null / empty vnode using:
@@ -66,8 +65,9 @@
 - Example:
   ```ts
   export interface ButtonEmits {
-    (e: 'click', ev: MouseEvent): void
-    (e: 'update:loading', v: boolean): void
+    click: (ev:MouseEvent) => void
+    'update:loading': (v: boolean) => void
+    [key:string] :(...args:any[]) => void
   }
   ```
 - In `setup()`:
@@ -80,10 +80,13 @@
 
 ## 🧱 Component Structure Template
 
-```ts
+```tsx
 import { defineComponent, computed } from 'vue'
 import { filterEmpty, getSlotPropFn } from '../_util'
 import type { RenderNodeFn } from '../_util/type'
+import { useComponentBaseConfig } from '../config-provider/context.ts'
+import { clsx } from '@v-c/util'
+
 
 export interface ButtonProps {
   type?: 'default' | 'primary'
@@ -94,7 +97,8 @@ export interface ButtonProps {
 }
 
 export type ButtonEmits = {
-  (e: 'click', ev: MouseEvent): void
+    click: (ev:MouseEvent) => void
+    [key:string] :(...args:any[]) => void
 }
 
 export interface ButtonSlots {
@@ -102,32 +106,25 @@ export interface ButtonSlots {
   icon?: (ctx?: { size?: number }) => any
 }
 
-export default defineComponent<ButtonProps, ButtonEmits, string, SlotsType<ButtonSlots>>({
-  name: 'AButton',
-  inheritAttrs: false,
-  props: { type: String, disabled: Boolean, rootClass: String, classes: Object },
-  emits: ['click'],
-  setup(props, { slots, attrs, emit }) {
-    const iconFn = getSlotPropFn(slots, props, 'icon')
-    const prefixCls = 'ant-btn'
-    const rootCls = computed(() => [
-      prefixCls,
-      props.rootClass,
-      props.classes?.root,
-      attrs.class,
-    ])
-
-    const onClick = (e: MouseEvent) => {
-      if (!props.disabled) emit('click', e)
-    }
-
-    return () => (
-      <button class={rootCls.value} style={attrs.style} onClick={onClick}>
-        {filterEmpty(iconFn?.({ size: 16 }) ?? [])}
-        {filterEmpty(slots.default?.() ?? [])}
-      </button>
-    )
-  },
+export default defineComponent<
+    ButtonProps,
+    ButtonEmits,
+    string, SlotsType<ButtonSlots>
+>(
+    (props, { slots, attrs, emit })=>{
+        const { prefixCls } = useComponentBaseConfig('button',props,[],'btn')
+        const onClick = (e: MouseEvent) => {
+            if (!props.disabled) emit('click', e)
+        }
+        return () =>{
+            const { className,style,restAttrs } = getAttrStyleAndClass(attrs)
+            const rootCls = clsx(prefixCls.value,className)
+            return (
+                <button class={rootCls} style={style} onClick={onClick}>
+                    {slots.default?.()}
+                </button>
+            )
+        }
 })
 ```
 
@@ -136,11 +133,10 @@ export default defineComponent<ButtonProps, ButtonEmits, string, SlotsType<Butto
 | Utility                           | Source | Purpose |
 |-----------------------------------|---------|---------|
 | `filterEmpty`                     | `@v-c/util/dist/props-util` | Remove empty vnode/fragments |
-| `getSlotPropFn`                   | `../_util/tools.ts` | Generate unified render function |
-| `classNames`                      | `@v-c/util` | Class merging utility |
+| `getSlotPropFnRun`                | `../_util/tools.ts` | Generate unified render function |
 | `clsx`                            | `@v-c/util` | Class merging utility |
 | `toArray`                         | `es-toolkit/compat` | Normalize child nodes |
-| `useConfig`, `useComponentConfig` | `config-provider/context.ts` | Access global component config |
+| `useConfig`, `useComponentBaseConfig` | `config-provider/context.ts` | Access global component config |
 | `useSize`, `useDisabledContext`   | `config-provider/hooks` | Context utilities for sizing/disabled state |
 
 ## 🔠 Naming & Styling Conventions
@@ -165,14 +161,14 @@ export default defineComponent<ButtonProps, ButtonEmits, string, SlotsType<Butto
 ### Playground Demos
 Each component must include a demo under `playground/src/demos/`:
 
-| Case | Required Demo |
-|-------|----------------|
-| Base usage | `<AButton @click="...">Text</AButton>` |
-| rootClass / classes | Props-based styling override |
-| Slot rendering | `#icon` slot example |
-| Props rendering | `:icon="..."` example |
-| Loading | Boolean & object delay cases |
-| href | `<AButton href="...">` link case |
+| Case | Required Demo                            |
+|-------|------------------------------------------|
+| Base usage | `<a-button @click="...">Text</a-button>` |
+| rootClass / classes | Props-based styling override             |
+| Slot rendering | `#icon` slot example                     |
+| Props rendering | `:icon="..."` example                    |
+| Loading | Boolean & object delay cases             |
+| href | `<a-button href="...">` link case        |
 
 ## 🚫 Deprecated / Removed React Props
 
