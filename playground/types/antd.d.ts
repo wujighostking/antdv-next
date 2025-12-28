@@ -104,5 +104,10 @@ declare module 'vue' {
     AMentions: typeof import('antdv-next')['Mentions']
     ACarousel: typeof import('antdv-next')['Carousel']
     ACascader: typeof import('antdv-next')['Cascader']
+    ATable: typeof import('antdv-next')['Table']
+    ATableColumn: typeof import('antdv-next')['TableColumn']
+    ATableSummary: typeof import('antdv-next')['TableSummary']
+    ATableSummaryRow: typeof import('antdv-next')['TableSummaryRow']
+    ATableSummaryCell: typeof import('antdv-next')['TableSummaryCell']
   }
 }

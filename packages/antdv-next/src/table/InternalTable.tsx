@@ -11,6 +11,7 @@ import type { FilterState } from './hooks/useFilter'
 import type { SortState } from './hooks/useSorter'
 import type {
   ColumnsType,
+  ColumnType,
   ExpandType,
   FilterValue,
   GetPopupContainer,
@@ -155,6 +156,8 @@ export interface TableSlots<RecordType = AnyObject> {
   summary?: (data: readonly RecordType[]) => any
   emptyText?: () => any
   expandIcon?: (info: any) => any
+  headerCell?: (ctx: { column: ColumnType<RecordType>, index: number, text: any }) => any
+  bodyCell?: (ctx: { column: ColumnType<RecordType>, index: number, text: any, record: RecordType }) => any
 }
 
 function resolvePanelRender<RecordType>(
@@ -632,6 +635,11 @@ const InternalTable = defineComponent<
       return renderEmpty?.('Table') || <DefaultRenderEmpty componentName="Table" />
     })
 
+    const renderHeaderCell = (ctx: { column: ColumnType<RecordType>, index: number, text: any }) =>
+      getSlotPropsFnRun(slots, props as any, 'headerCell', true, ctx)
+    const renderBodyCell = (ctx: { column: ColumnType<RecordType>, index: number, text: any, record: RecordType }) =>
+      getSlotPropsFnRun(slots, props as any, 'bodyCell', true, ctx)
+
     const mergedVirtual = computed(() => props.virtual ?? contextVirtual.value)
     const TableComponent = computed(() => mergedVirtual.value ? VcVirtualTable : VcTable)
 
@@ -706,6 +714,8 @@ const InternalTable = defineComponent<
               expandable={mergedExpandableConfig.value}
               prefixCls={prefixCls.value}
               direction={props.direction ?? direction.value}
+              headerCell={slots.headerCell || props.headerCell ? renderHeaderCell : undefined}
+              bodyCell={slots.bodyCell || props.bodyCell ? renderBodyCell : undefined}
               className={tableClassName}
               internalHooks={INTERNAL_HOOKS}
               internalRefs={internalRefs}
