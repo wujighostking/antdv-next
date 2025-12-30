@@ -149,11 +149,10 @@ function wrapStringListType(keys?: FilterKey) {
 
 function useSyncState<T>(defaultValue: T) {
   const stateRef = shallowRef(defaultValue)
-  const getState = () => stateRef.value
   const setState = (next: T | ((prev: T) => T)) => {
     stateRef.value = typeof next === 'function' ? (next as (prev: T) => T)(stateRef.value) : next
   }
-  return [getState, setState] as const
+  return [stateRef, setState] as const
 }
 
 const defaults = {
@@ -209,7 +208,7 @@ const FilterDropdown = defineComponent<
     })
 
     const propFilteredKeys = computed(() => props.filterState?.filteredKeys)
-    const [getFilteredKeysSync, setFilteredKeysSync] = useSyncState(
+    const [filteredKeysSync, setFilteredKeysSync] = useSyncState(
       wrapStringListType(propFilteredKeys.value),
     )
 
@@ -273,7 +272,7 @@ const FilterDropdown = defineComponent<
 
     const onConfirm = () => {
       triggerVisible(false)
-      internalTriggerFilter(getFilteredKeysSync())
+      internalTriggerFilter(filteredKeysSync.value)
     }
 
     const onReset = (
@@ -300,7 +299,7 @@ const FilterDropdown = defineComponent<
       if (closeDropdown) {
         triggerVisible(false)
       }
-      internalTriggerFilter(getFilteredKeysSync())
+      internalTriggerFilter(filteredKeysSync.value)
     }
 
     const filterDropdownDefined = computed(() => (
@@ -366,7 +365,7 @@ const FilterDropdown = defineComponent<
         filters: props?.column?.filters || [],
         filterSearch: filterSearch.value as FilterSearchType<ColumnFilterItem>,
         prefixCls: props.prefixCls,
-        filteredKeys: getFilteredKeysSync(),
+        filteredKeys: filteredKeysSync.value,
         filterMultiple: props.filterMultiple,
         searchValue: searchValue.value,
       })
@@ -380,7 +379,7 @@ const FilterDropdown = defineComponent<
         const baseDropdownProps = {
           prefixCls: `${props.dropdownPrefixCls}-custom`,
           setSelectedKeys: (selectedKeys: any) => onSelectKeys({ selectedKeys: selectedKeys as string[] }),
-          selectedKeys: getFilteredKeysSync(),
+          selectedKeys: filteredKeysSync.value,
           confirm: doFilter,
           clearFilters: onReset,
           filters: column.value.filters,
@@ -402,7 +401,7 @@ const FilterDropdown = defineComponent<
           dropdownContent = column.value.filterDropdown
         }
         else {
-          const selectedKeys = getFilteredKeysSync() || []
+          const selectedKeys = filteredKeysSync.value || []
           const getFilterComponent = () => {
             const empty = renderEmpty?.('Table.filter') ?? (
               <Empty
