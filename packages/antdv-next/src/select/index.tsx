@@ -47,7 +47,7 @@ export interface LabeledValue {
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined
 
 export interface InternalSelectProps
-  extends ComponentBaseProps, Omit<VcSelectProps, 'mode' | 'classNames' | 'className' | 'style'> {
+  extends ComponentBaseProps, Omit<VcSelectProps, 'mode' | 'classNames' | 'className' | 'style' | 'prefix' | 'styles'> {
   prefix?: VueNode
   suffixIcon?: VueNode
   size?: SizeType
@@ -513,7 +513,7 @@ const Select = defineComponent<
       }
       return (
         <VcSelect
-          {...restAttrs}
+          {...restAttrs as any}
           {...onAttrs}
           virtual={virtual.value}
           classNames={mergedClassNames.value}
