@@ -18,6 +18,12 @@ group:
 ## Examples {#examples}
 
 <demo-group>
+ <demo src="./demo/basic.vue">Basic</demo>
+ <demo src="./demo/type.vue">Type</demo>
+ <demo src="./demo/dynamic.vue">Autoset Font Size</demo>
+ <demo src="./demo/badge.vue">With Badge</demo>
+ <demo src="./demo/group.vue">Avatar.Group</demo>
+ <demo src="./demo/responsive.vue">Responsive Size</demo>
 </demo-group>
 
 ## API

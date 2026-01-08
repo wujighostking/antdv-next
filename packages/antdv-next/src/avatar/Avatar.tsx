@@ -119,7 +119,7 @@ const Avatar = defineComponent<
       ctxSize => props?.size ?? avatarCtx.value?.size ?? ctxSize ?? 'default',
     )
     const needResponsive = computed(() => {
-      return Object.keys(typeof size === 'object' ? size || {} : {}).some(key => ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key))
+      return Object.keys(typeof size.value === 'object' ? size.value || {} : {}).some(key => ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key))
     })
     const screens = useBreakpoint(needResponsive)
 
@@ -136,13 +136,14 @@ const Avatar = defineComponent<
         crossOrigin,
         alt,
       } = props
+
       const responsiveSizeStyleFn = () => {
-        if (typeof size !== 'object') {
+        if (typeof size.value !== 'object') {
           return {}
         }
 
         const currentBreakpoint: Breakpoint = responsiveArray.find(screen => screens.value![screen])!
-        const currentSize = (size.value as any)[currentBreakpoint]
+        const currentSize = (size.value as any)[currentBreakpoint] || size.value
         return currentSize
           ? {
               width: `${currentSize}px`,
@@ -184,11 +185,11 @@ const Avatar = defineComponent<
       )
 
       const sizeStyle: CSSProperties
-        = typeof size === 'number'
+        = typeof size.value === 'number'
           ? {
-              width: `${size}px`,
-              height: `${size}px`,
-              fontSize: icon ? (`${size / 2}px`) : '18px',
+              width: `${size.value}px`,
+              height: `${size.value}px`,
+              fontSize: icon ? (`${size.value / 2}px`) : '18px',
             }
           : {}
 
