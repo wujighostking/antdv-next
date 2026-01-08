@@ -124,8 +124,8 @@ catalogs:
       specifier: ^0.0.1
       version: 0.0.1
     '@v-c/picker':
-      specifier: ^0.0.3
-      version: 0.0.3
+      specifier: ^0.0.4
+      version: 0.0.4
     '@v-c/progress':
       specifier: ^0.0.2
       version: 0.0.2
@@ -484,7 +484,7 @@ importers:
         version: 0.0.1(vue@3.5.25(typescript@5.9.3))
       '@v-c/picker':
         specifier: 'catalog:'
-        version: 0.0.3(dayjs@1.11.19)(vue@3.5.25(typescript@5.9.3))
+        version: 0.0.4(dayjs@1.11.19)(vue@3.5.25(typescript@5.9.3))
       '@v-c/progress':
         specifier: 'catalog:'
         version: 0.0.2(vue@3.5.25(typescript@5.9.3))
@@ -2209,8 +2209,8 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  '@v-c/picker@0.0.3':
-    resolution: {integrity: sha512-C982m/HrULt074RI1Tke6+Stk9NgFHJPRba4ru6RMroqrx5dRe9Yiq6HM0PuU7bx7vmplajTXpsuQZF8lzva/g==}
+  '@v-c/picker@0.0.4':
+    resolution: {integrity: sha512-U8GNEDDVMiLQGd0Wptz9yr5zZxp5oWdI6WeKZW6Rf2WGwdTO5IEZoFR/CaXL2/TmRVOKvpGbYHYeBH+fOJZdhQ==}
     peerDependencies:
       date-fns: '>= 2.x'
       dayjs: '>= 1.x'
@@ -6990,7 +6990,7 @@ snapshots:
       '@v-c/util': 1.0.6(vue@3.5.25(typescript@5.9.3))
       vue: 3.5.25(typescript@5.9.3)
 
-  '@v-c/picker@0.0.3(dayjs@1.11.19)(vue@3.5.25(typescript@5.9.3))':
+  '@v-c/picker@0.0.4(dayjs@1.11.19)(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@v-c/overflow': 1.0.1(vue@3.5.25(typescript@5.9.3))
       '@v-c/trigger': 1.0.2(vue@3.5.25(typescript@5.9.3))
