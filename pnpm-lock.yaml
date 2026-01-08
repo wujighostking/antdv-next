@@ -704,6 +704,9 @@ importers:
       '@types/markdown-it-container':
         specifier: 'catalog:'
         version: 2.0.11
+      '@types/picomatch':
+        specifier: ^4.0.2
+        version: 4.0.2
       dom-serializer:
         specifier: 'catalog:'
         version: 2.0.0
@@ -749,6 +752,9 @@ importers:
       pathe:
         specifier: 'catalog:'
         version: 2.0.3
+      picomatch:
+        specifier: ^4.0.3
+        version: 4.0.3
       postcss:
         specifier: 'catalog:'
         version: 8.5.6
@@ -1942,6 +1948,9 @@ packages:
 
   '@types/node@24.10.4':
     resolution: {integrity: sha512-vnDVpYPMzs4wunl27jHrfmwojOGKya0xyM3sH+UE5iv5uPS6vX7UIoh6m+vQc5LGBq52HBKPIn/zcSZVzeDEZg==}
+
+  '@types/picomatch@4.0.2':
+    resolution: {integrity: sha512-qHHxQ+P9PysNEGbALT8f8YOSHW0KJu6l2xU8DYY0fu/EmGxXdVnuTLvFUvBgPJMSqXq29SYHveejeAha+4AYgA==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -6619,6 +6628,8 @@ snapshots:
   '@types/node@24.10.4':
     dependencies:
       undici-types: 7.16.0
+
+  '@types/picomatch@4.0.2': {}
 
   '@types/stack-utils@2.0.3': {}
 
