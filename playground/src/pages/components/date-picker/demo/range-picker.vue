@@ -1,3 +1,11 @@
+<docs lang="zh-CN">
+通过设置 `picker` 属性，指定范围选择器类型。
+</docs>
+
+<docs lang="en-US">
+Set range picker type by `picker` prop.
+</docs>
+
 <script lang="ts" setup>
 import { shallowRef } from 'vue'
 

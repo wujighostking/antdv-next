@@ -14,9 +14,13 @@ demo:
 
 ## 何时使用 {#when-to-use}
 
+当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。
+
 ## 示例 {#examples}
 
 <demo-group>
+  <demo src="./demo/basic.vue">基本</demo>
+  <demo src="./demo/range-picker.vue">范围选择器</demo>
 </demo-group>
 
 ## API

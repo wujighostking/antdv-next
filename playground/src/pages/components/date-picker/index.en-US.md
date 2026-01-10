@@ -11,11 +11,14 @@ demo:
 
 <DocHeading></DocHeading>
 
-## When To Use {#when-to-use}
+## When To Use
+By clicking the input box, you can select a date from a popup calendar.
 
-## Examples {#examples}
+## Examples
 
 <demo-group>
+  <demo src="./demo/basic.vue">Basic</demo>
+  <demo src="./demo/range-picker.vue">Range Picker</demo>
 </demo-group>
 
 ## API
