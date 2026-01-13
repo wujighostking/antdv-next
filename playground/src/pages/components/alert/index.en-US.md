@@ -15,9 +15,24 @@ group:
 
 ## When To Use {#when-to-use}
 
+- When you need to show alert messages to users.
+- When you need a persistent static container which is closable by user actions.
+
 ## Examples {#examples}
 
 <demo-group>
+  <demo src="./demo/basic.vue">Basic</demo>
+  <demo src="./demo/style.vue">More types</demo>
+  <demo src="./demo/closable.vue">Closable</demo>
+  <demo src="./demo/description.vue">Description</demo>
+  <demo src="./demo/icon.vue">Icon</demo>
+  <demo src="./demo/banner.vue" iframe="250">Banner</demo>
+  <demo src="./demo/loop-banner.vue">Loop Banner</demo>
+  <demo src="./demo/smooth-closed.vue">Smoothly Unmount</demo>
+  <demo src="./demo/custom-icon.vue" debug>Custom Icon</demo>
+  <demo src="./demo/action.vue">Custom action</demo>
+  <demo src="./demo/component-token.vue" debug>Component Token</demo>
+  <demo src="./demo/style-class.vue">Custom semantic dom styling</demo>
 </demo-group>
 
 ## API
@@ -55,10 +70,28 @@ Common props ref：[Common props](/docs/vue/common-props)
 
 ### Slots {#slots}
 
-| Slot | Description | Type | Version |
-| --- | --- | --- | --- |
-| message | Content of Alert, please use `title` instead | () =&gt; any | - |
+| Slot        | Description | Type | Version |
+|-------------| --- | --- | --- |
+| message     | Content of Alert, please use `title` instead | () =&gt; any | - |
+| title       | Content of Alert| () =&gt; any | - |
 | description | Additional content of Alert | () =&gt; any | - |
-| icon | Custom icon, effective when `showIcon` is true | () =&gt; any | - |
-| closeIcon | - | () =&gt; any | - |
-| action | The action of Alert | () =&gt; any | 4.9.0 |
+| icon        | Custom icon, effective when `showIcon` is true | () =&gt; any | - |
+| closeIcon   | - | () =&gt; any | - |
+| action      | The action of Alert | () =&gt; any | 4.9.0 |
+
+## Semantic DOM {#semantic-dom}
+
+| Name | Description |
+| --- | --- |
+| root | Root element |
+| icon | Icon element |
+| section | Content wrapper |
+| title | Title element |
+| description | Description element |
+| actions | Action element |
+
+## Design Token {#design-token}
+
+<ComponentTokenTable component="Alert"></ComponentTokenTable>
+
+See [Customize Theme](/docs/vue/customize-theme) to learn how to use Design Token.

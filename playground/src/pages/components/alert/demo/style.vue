@@ -1,9 +1,17 @@
+<docs lang="zh-CN">
+共有四种样式 `success`、`info`、`warning`、`error`。
+</docs>
+
+<docs lang="en-US">
+There are 4 types of Alert: `success`, `info`, `warning`, `error`.
+</docs>
+
 <template>
-  <a-alert message="Success Text" type="success" />
+  <a-alert title="Success Text" type="success" />
   <br>
-  <a-alert message="Info Text" type="info" />
+  <a-alert title="Info Text" type="info" />
   <br>
-  <a-alert message="Warning Text" type="warning" />
+  <a-alert title="Warning Text" type="warning" />
   <br>
-  <a-alert message="Error Text" type="error" />
+  <a-alert title="Error Text" type="error" />
 </template>

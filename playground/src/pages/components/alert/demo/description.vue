@@ -1,24 +1,32 @@
+<docs lang="zh-CN">
+含有辅助性文字介绍的警告提示。
+</docs>
+
+<docs lang="en-US">
+Additional description for alert message.
+</docs>
+
 <template>
   <a-alert
-    message="Success Text"
+    title="Success Text"
     description="Success Description Success Description Success Description"
     type="success"
   />
   <br>
   <a-alert
-    message="Info Text"
+    title="Info Text"
     description="Info Description Info Description Info Description Info Description"
     type="info"
   />
   <br>
   <a-alert
-    message="Warning Text"
+    title="Warning Text"
     description="Warning Description Warning Description Warning Description Warning Description"
     type="warning"
   />
   <br>
   <a-alert
-    message="Error Text"
+    title="Error Text"
     description="Error Description Error Description Error Description Error Description"
     type="error"
   />

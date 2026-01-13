@@ -53,6 +53,7 @@ export type AlertSlots = SlotsDefineType<{
   icon?: () => any
   closeIcon?: () => any
   action?: () => any
+  title?: () => any
 }>
 
 export interface AlertEmits {

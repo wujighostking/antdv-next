@@ -1,32 +1,36 @@
-<script setup lang="ts">
+<docs lang="zh-CN">
+可口的图标让信息类型更加醒目。
+</docs>
 
-</script>
+<docs lang="en-US">
+A relevant icon will make information clearer and more friendly.
+</docs>
 
 <template>
-  <a-alert message="Success Tips" type="success" show-icon />
+  <a-alert title="Success Tips" type="success" show-icon />
   <br>
-  <a-alert message="Informational Notes" type="info" show-icon />
+  <a-alert title="Informational Notes" type="info" show-icon />
   <br>
-  <a-alert message="Warning" type="warning" show-icon closable />
+  <a-alert title="Warning" type="warning" show-icon closable />
   <br>
-  <a-alert message="Error" type="error" show-icon />
+  <a-alert title="Error" type="error" show-icon />
   <br>
   <a-alert
-    message="Success Tips"
+    title="Success Tips"
     description="Detailed description and advice about successful copywriting."
     type="success"
     show-icon
   />
   <br>
   <a-alert
-    message="Informational Notes"
+    title="Informational Notes"
     description="Additional description and information about copywriting."
     type="info"
     show-icon
   />
   <br>
   <a-alert
-    message="Warning"
+    title="Warning"
     description="This is a warning notice about copywriting."
     type="warning"
     show-icon
@@ -34,13 +38,9 @@
   />
   <br>
   <a-alert
-    message="Error"
+    title="Error"
     description="This is an error message about copywriting."
     type="error"
     show-icon
   />
 </template>
-
-<style scoped>
-
-</style>

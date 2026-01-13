@@ -1,21 +1,21 @@
-<script setup lang="ts">
+<docs lang="zh-CN">
+页面顶部通告形式，默认有图标且 `type` 为 'warning'。
+</docs>
 
-</script>
+<docs lang="en-US">
+Display Alert as a banner at top of page.
+</docs>
 
 <template>
-  <a-alert message="Warning text" banner />
+  <a-alert title="Warning text" banner />
   <br>
   <a-alert
-    message="Very long warning text warning text text text text text text text"
+    title="Very long warning text warning text text text text text text text"
     banner
     closable
   />
   <br>
-  <a-alert :show-icon="false" message="Warning text without icon" banner />
+  <a-alert :show-icon="false" title="Warning text without icon" banner />
   <br>
-  <a-alert type="error" message="Error text" banner />
+  <a-alert type="error" title="Error text" banner />
 </template>
-
-<style scoped>
-
-</style>

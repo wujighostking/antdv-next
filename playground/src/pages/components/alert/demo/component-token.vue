@@ -1,5 +1,16 @@
+<docs lang="zh-CN">
+自定义组件 Token。
+</docs>
+
+<docs lang="en-US">
+Custom component token.
+</docs>
+
 <script setup lang="ts">
+import { h } from 'vue'
 import { SmileOutlined } from '@antdv-next/icons'
+
+const icon = () => h(SmileOutlined)
 </script>
 
 <template>
@@ -14,18 +25,11 @@ import { SmileOutlined } from '@antdv-next/icons'
     }"
   >
     <a-alert
-      message="Success Tips"
+      :icon="icon"
+      title="Success Tips"
       description="Detailed description and advice about successful copywriting."
       type="success"
       show-icon
-    >
-      <template #icon>
-        <SmileOutlined />
-      </template>
-    </a-alert>
+    />
   </a-config-provider>
 </template>
-
-<style scoped>
-
-</style>

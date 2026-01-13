@@ -1,6 +1,14 @@
+<docs lang="zh-CN">
+可以在右上角自定义操作项。
+</docs>
+
+<docs lang="en-US">
+Custom action.
+</docs>
+
 <template>
   <a-alert
-    message="Success Tips"
+    title="Success Tips"
     type="success"
     show-icon
     closable
@@ -13,7 +21,7 @@
   </a-alert>
   <br>
   <a-alert
-    message="Error Text"
+    title="Error Text"
     show-icon
     description="Error Description Error Description Error Description Error Description"
     type="error"
@@ -26,7 +34,7 @@
   </a-alert>
   <br>
   <a-alert
-    message="Warning Text"
+    title="Warning Text"
     type="warning"
     closable
   >
@@ -40,7 +48,7 @@
   </a-alert>
   <br>
   <a-alert
-    message="Info Text"
+    title="Info Text"
     description="Info Description Info Description Info Description Info Description"
     type="info"
     closable
