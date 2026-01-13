@@ -1,13 +1,28 @@
+<docs lang="zh-CN">
+最简单的用法。
+</docs>
+
+<docs lang="en-US">
+The simplest usage.
+</docs>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const top = ref(100)
+const bottom = ref(100)
+</script>
+
 <template>
-  <div style="height: 200vh">
-    <a-affix :offset-top="20">
-      <button>测试</button>
-    </a-affix>
-    <div style="height: 300px;">
-      <div style="height: 200px" />
-      <a-affix :offset-top="200">
-        <button>测试2</button>
-      </a-affix>
-    </div>
-  </div>
+  <a-affix :offset-top="top">
+    <a-button @click="() => top = top + 10">
+      Affix top
+    </a-button>
+  </a-affix>
+  <br>
+  <a-affix :offset-bottom="bottom">
+    <a-button @click="() => bottom = bottom + 10">
+      Affix bottom
+    </a-button>
+  </a-affix>
 </template>
