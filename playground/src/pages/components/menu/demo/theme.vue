@@ -1,18 +1,18 @@
 <docs lang="zh-CN">
-垂直菜单，子菜单内嵌在菜单区域。
+内建了两套主题 `light` 和 `dark`，默认 `light`。
 </docs>
 
 <docs lang="en-US">
-Vertical menu with inline submenus.
+There are two built-in themes: `light` and `dark`. The default value is `light`.
 </docs>
 
 <script setup lang="ts">
 import type { MenuItemType } from 'antdv-next'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@antdv-next/icons'
+import { ref } from 'vue'
 
-function handleClick(e: any) {
-  console.log('click ', e)
-}
+const theme = ref<'dark' | 'light'>('dark')
+const current = ref('1')
 
 const items: MenuItemType[] = [
   {
@@ -20,24 +20,10 @@ const items: MenuItemType[] = [
     label: 'Navigation One',
     icon: MailOutlined,
     children: [
-      {
-        key: 'g1',
-        label: 'Item 1',
-        type: 'group',
-        children: [
-          { key: '1', label: 'Option 1' },
-          { key: '2', label: 'Option 2' },
-        ],
-      },
-      {
-        key: 'g2',
-        label: 'Item 2',
-        type: 'group',
-        children: [
-          { key: '3', label: 'Option 3' },
-          { key: '4', label: 'Option 4' },
-        ],
-      },
+      { key: '1', label: 'Option 1' },
+      { key: '2', label: 'Option 2' },
+      { key: '3', label: 'Option 3' },
+      { key: '4', label: 'Option 4' },
     ],
   },
   {
@@ -58,9 +44,6 @@ const items: MenuItemType[] = [
     ],
   },
   {
-    type: 'divider',
-  },
-  {
     key: 'sub4',
     label: 'Navigation Three',
     icon: SettingOutlined,
@@ -71,25 +54,34 @@ const items: MenuItemType[] = [
       { key: '12', label: 'Option 12' },
     ],
   },
-  {
-    key: 'grp',
-    label: 'Group',
-    type: 'group',
-    children: [
-      { key: '13', label: 'Option 13' },
-      { key: '14', label: 'Option 14' },
-    ],
-  },
 ]
+
+function changeTheme(value: boolean) {
+  theme.value = value ? 'dark' : 'light'
+}
+
+function onClick(e: any) {
+  console.log('click ', e)
+  current.value = e.key
+}
 </script>
 
 <template>
+  <a-switch
+    :checked="theme === 'dark'"
+    checked-children="Dark"
+    un-checked-children="Light"
+    @change="changeTheme"
+  />
+  <br>
+  <br>
   <a-menu
+    :theme="theme"
+    :selected-keys="[current]"
     style="width: 256px"
     :default-open-keys="['sub1']"
-    :default-selected-keys="['1']"
     mode="inline"
     :items="items"
-    @click="handleClick"
+    @click="onClick"
   />
 </template>

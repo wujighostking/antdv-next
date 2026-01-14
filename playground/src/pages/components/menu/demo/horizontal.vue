@@ -1,7 +1,15 @@
+<docs lang="zh-CN">
+水平的顶部导航菜单。
+</docs>
+
+<docs lang="en-US">
+Horizontal top navigation menu.
+</docs>
+
 <script setup lang="ts">
 import type { MenuItemType } from 'antdv-next'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@antdv-next/icons'
-import { ref } from 'vue'
+import { h, ref } from 'vue'
 
 const current = ref('mail')
 
@@ -47,6 +55,15 @@ const items: MenuItemType[] = [
   },
   {
     key: 'alipay',
+    label: h(
+      'a',
+      {
+        href: 'https://ant.design',
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      },
+      'Navigation Four - Link',
+    ),
   },
 ]
 </script>
@@ -57,17 +74,5 @@ const items: MenuItemType[] = [
     mode="horizontal"
     :items="items"
     @click="handleClick"
-  >
-    <template #labelRender="item">
-      <template v-if="item?.key === 'alipay'">
-        <a
-          href="https://ant.design"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Navigation Four - Link
-        </a>
-      </template>
-    </template>
-  </a-menu>
+  />
 </template>

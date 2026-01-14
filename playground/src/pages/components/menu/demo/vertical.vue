@@ -1,3 +1,11 @@
+<docs lang="zh-CN">
+子菜单是弹出的形式。
+</docs>
+
+<docs lang="en-US">
+Submenus open as pop-ups.
+</docs>
+
 <script setup lang="ts">
 import type { MenuItemType } from 'antdv-next'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@antdv-next/icons'
