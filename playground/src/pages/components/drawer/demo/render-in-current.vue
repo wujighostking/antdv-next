@@ -15,13 +15,14 @@ Render in current dom. custom container, check `getContainer`.
 </docs>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { theme } from 'antdv-next'
 import { computed, ref } from 'vue'
 
 const { token } = theme.useToken()
 const open = ref(false)
 
-const containerStyle = computed(() => ({
+const containerStyle = computed<CSSProperties>(() => ({
   position: 'relative',
   height: '200px',
   padding: '48px',
