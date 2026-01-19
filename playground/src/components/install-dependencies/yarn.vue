@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue'
 import { iconWrap } from './common'
 
 defineOptions({ name: 'YarnLogo' })
 </script>
 
 <template>
-  <span :class="[$attrs.class]" :style="{ ...iconWrap, ...$attrs.style as CSSProperties }">
+  <span :style="iconWrap">
     <svg
-      aria-hidden="true" fill="#2C8EBB" focusable="false" height="1em" stroke="#2C8EBB" strokeWidth="0"
+      aria-hidden="true" fill="#2C8EBB" focusable="false" height="1em" stroke="#2C8EBB" stroke-width="0"
       viewBox="0 0 496 512" width="1em"
     >
       <title>yarn icon</title>
@@ -18,5 +17,3 @@ defineOptions({ name: 'YarnLogo' })
     </svg>
   </span>
 </template>
-
-<style scoped></style>

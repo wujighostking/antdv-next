@@ -416,6 +416,7 @@ const InternalFormItem = defineComponent<
         const child = isVNode(baseChildren) ? baseChildren : baseChildren[0]
         const childProps = child.props || {}
         const newChildProps = {
+          id: currentFieldId,
           ...childProps,
           onBlur: (...args: any[]) => {
             onFieldBlur()
@@ -429,6 +430,7 @@ const InternalFormItem = defineComponent<
               childProps.onFocus(...args)
             }
           },
+
         }
         baseChildren = cloneVNode(child, newChildProps)
       }

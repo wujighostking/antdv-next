@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue'
 import { iconWrap } from './common'
 
 defineOptions({ name: 'BunLogo' })
 </script>
 
 <template>
-  <span :class="[$attrs.class]" :style="{ ...iconWrap, ...$attrs.style as CSSProperties }">
+  <span :style="iconWrap">
     <svg id="Bun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 70" width="1em" height="1em">
       <title>Bun Logo</title>
       <path
@@ -32,7 +31,7 @@ defineOptions({ name: 'BunLogo' })
         <path
           id="Top"
           d="M35.12,5.53A16.41,16.41,0,0,1,29.49,18c-.28.25-.06.73.3.59,3.37-1.31,7.92-5.23,6-13.14C35.71,5,35.12,5.12,35.12,5.53Zm2.27,0A16.24,16.24,0,0,1,39,19c-.12.35.31.65.55.36C41.74,16.56,43.65,11,37.93,5,37.64,4.74,37.19,5.14,37.39,5.49Zm2.76-.17A16.42,16.42,0,0,1,47,17.12a.33.33,0,0,0,.65.11c.92-3.49.4-9.44-7.17-12.53C40.08,4.54,39.82,5.08,40.15,5.32ZM21.69,15.76a16.94,16.94,0,0,0,10.47-9c.18-.36.75-.22.66.18-1.73,8-7.52,9.67-11.12,9.45C21.32,16.4,21.33,15.87,21.69,15.76Z"
-          style="fill: #ccbea7; fill-rule: 'evenodd'"
+          style="fill: #ccbea7; fill-rule:evenodd"
         />
         <path
           id="Outline"
@@ -63,21 +62,19 @@ defineOptions({ name: 'BunLogo' })
         />
       </g>
       <g id="Face">
-        <ellipse id="Right_Blush" data-name="Right Blush" cx="53.22" cy="40.18" rx="5.85" ry="3.44" style="fill: '#febbd0'" />
-        <ellipse id="Left_Bluch" data-name="Left Bluch" cx="22.95" cy="40.18" rx="5.85" ry="3.44" style="fill: '#febbd0'" />
+        <ellipse id="Right_Blush" data-name="Right Blush" cx="53.22" cy="40.18" rx="5.85" ry="3.44" style="fill: #febbd0" />
+        <ellipse id="Left_Bluch" data-name="Left Bluch" cx="22.95" cy="40.18" rx="5.85" ry="3.44" style="fill: #febbd0" />
         <path
           id="Eyes"
           d="M25.7,38.8a5.51,5.51,0,1,0-5.5-5.51A5.51,5.51,0,0,0,25.7,38.8Zm24.77,0A5.51,5.51,0,1,0,45,33.29,5.5,5.5,0,0,0,50.47,38.8Z"
-          style="fill-rule: 'evenodd'"
+          style="fill-rule: evenodd"
         />
         <path
           id="Iris"
           d="M24,33.64a2.07,2.07,0,1,0-2.06-2.07A2.07,2.07,0,0,0,24,33.64Zm24.77,0a2.07,2.07,0,1,0-2.06-2.07A2.07,2.07,0,0,0,48.75,33.64Z"
-          style="fill: #fff; fill-rule: 'evenodd'"
+          style="fill: #fff; fill-rule: evenodd"
         />
       </g>
     </svg>
   </span>
 </template>
-
-<style scoped></style>

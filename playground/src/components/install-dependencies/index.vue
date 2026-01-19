@@ -46,5 +46,3 @@ const items = [
 <template>
   <a-tabs :items="items" size="small" default-active-key="npm" />
 </template>
-
-<style scoped></style>

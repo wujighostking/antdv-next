@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue'
 import { iconWrap } from './common'
 
 defineOptions({ name: 'PnpmLogo' })
 </script>
 
 <template>
-  <span :class="[$attrs.class]" :style="{ ...iconWrap, ...$attrs.style as CSSProperties }">
+  <span :style="iconWrap">
     <svg
-      aria-hidden="true" fill="#F69220" focusable="false" height="1em" role="img" stroke="#F69220" strokeWidth="0"
+      aria-hidden="true" fill="#F69220" focusable="false" height="1em" role="img" stroke="#F69220" stroke-width="0"
       viewBox="0 0 24 24" width="1em"
     >
       <title>pnpm icon</title>
@@ -18,5 +17,3 @@ defineOptions({ name: 'PnpmLogo' })
     </svg>
   </span>
 </template>
-
-<style scoped></style>
