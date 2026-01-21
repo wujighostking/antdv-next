@@ -1,9 +1,14 @@
 <docs lang="zh-CN">
 带行编辑功能的表格。
+
+> 所有可编辑表格不能采用`v-model:value="record.xxx"`的形式来双向绑定数据，否则会导致数据异常。
+> 所有的数据都建议采用表单的形式来进行数据的收集和校验。
 </docs>
 
 <docs lang="en-US">
 Table with editable rows.
+> For all editable tables, do not use `v-model:value="record.xxx"` for two-way data binding, which may cause data anomalies.
+> It is recommended to use forms to collect and validate data.
 </docs>
 
 <script setup lang="ts">

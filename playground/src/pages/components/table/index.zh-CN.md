@@ -47,8 +47,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAA
   <demo src="./demo/expand-sticky.vue">展开与粘性表头</demo>
   <demo src="./demo/nested-table.vue">嵌套表格</demo>
   <demo src="./demo/tree-data.vue">树形数据</demo>
-  <demo src="./demo/tree-table-ellipsis.vue">树形省略</demo>
-  <demo src="./demo/tree-table-preserveSelectedRowKeys.vue">保留选择</demo>
   <demo src="./demo/row-selection.vue">行选择</demo>
   <demo src="./demo/row-selection-custom.vue">自定义选择</demo>
   <demo src="./demo/row-selection-and-operation.vue">选择与操作</demo>

@@ -46,8 +46,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAA
   <demo src="./demo/expand-sticky.vue">Expand Sticky</demo>
   <demo src="./demo/nested-table.vue">Nested Table</demo>
   <demo src="./demo/tree-data.vue">Tree Data</demo>
-  <demo src="./demo/tree-table-ellipsis.vue">Tree Ellipsis</demo>
-  <demo src="./demo/tree-table-preserveSelectedRowKeys.vue">Preserve Selection</demo>
   <demo src="./demo/row-selection.vue">Row Selection</demo>
   <demo src="./demo/row-selection-custom.vue">Custom Selection</demo>
   <demo src="./demo/row-selection-and-operation.vue">Selection Operations</demo>

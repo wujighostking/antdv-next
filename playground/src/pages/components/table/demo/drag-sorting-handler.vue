@@ -1,9 +1,9 @@
 <docs lang="zh-CN">
-使用 [dnd-kit](https://github.com/clauderic/dnd-kit) 来实现一个拖拽操作列。
+使用原生api来实现一个拖拽操作列。
 </docs>
 
 <docs lang="en-US">
-Alternatively you can implement drag sorting with handler using [dnd-kit](https://github.com/clauderic/dnd-kit).
+Implement a drag-and-drop operation column using native browser APIs.
 </docs>
 
 <script setup lang="ts">
