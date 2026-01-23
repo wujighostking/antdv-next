@@ -1,6 +1,5 @@
 import type { CSSObject } from '@antdv-next/cssinjs'
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/internal'
-
 import { resetComponent } from '../../style'
 import { genStyleHooks, mergeToken } from '../../theme/internal'
 import { genCssVar } from '../../theme/util/genStyleUtils'
@@ -11,17 +10,17 @@ export interface ComponentToken {
    * @desc 轨迹颜色
    * @descEN Line color
    */
-  tailColor: string
+  tailColor?: string
   /**
    * @desc 轨迹宽度
    * @descEN Line width
    */
-  tailWidth: number | string
+  tailWidth?: number | string
   /**
    * @desc 节点边框宽度
    * @descEN Border width of node
    */
-  dotBorderWidth: number | string
+  dotBorderWidth?: number | string
   /**
    * @desc 节点大小
    * @descEN Node size
@@ -36,7 +35,7 @@ export interface ComponentToken {
    * @desc 时间项下间距
    * @descEN Bottom padding of item
    */
-  itemPaddingBottom: number
+  itemPaddingBottom?: number
 }
 
 export interface TimelineToken extends FullToken<'Timeline'> {
@@ -70,6 +69,9 @@ const genTimelineStyle: GenerateStyle<TimelineToken, CSSObject> = (token) => {
 
   return {
     [componentCls]: [
+      // ==============================================================
+      // ==                           Item                           ==
+      // ==============================================================
       {
         ...resetComponent(token),
 
@@ -262,8 +264,11 @@ export default genStyleHooks(
       customHeadPaddingVertical: token.paddingXXS,
       paddingInlineEnd: 2,
     })
-
-    return [genTimelineStyle(timeLineToken), genVerticalStyle(timeLineToken), genHorizontalStyle(timeLineToken)]
+    return [
+      genTimelineStyle(timeLineToken),
+      genVerticalStyle(timeLineToken),
+      genHorizontalStyle(timeLineToken),
+    ]
   },
   prepareComponentToken,
 )

@@ -130,8 +130,7 @@ const Timeline = defineComponent<
     })
 
     return () => {
-      const { orientation = 'vertical', variant = 'outlined',
-      } = props
+      const { orientation = 'vertical', variant = 'outlined' } = props
 
       return (
         <Steps

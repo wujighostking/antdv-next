@@ -1,5 +1,6 @@
 import type { CSSObject } from '@antdv-next/cssinjs'
 import type { TimelineToken } from '.'
+
 import type { GenerateStyle } from '../../theme/internal'
 import { unit } from '@antdv-next/cssinjs'
 import { genCssVar } from '../../theme/util/genStyleUtils'
