@@ -37,3 +37,41 @@ html {
   text-align: center;
   border-radius: 0;
 }
+
+.pic-plus {
+  & > * {
+    display: inline-block !important;
+    vertical-align: middle;
+  }
+  span {
+    margin: 0 var(--ant-margin-md);
+    color: #aaa;
+    font-size: 30px;
+    user-select: none;
+  }
+}
+
+.ant-doc-main-sider-menu.ant-menu-inline > .ant-menu-item-group > .ant-menu-item-group-title::after {
+  position: relative;
+  top: 12px;
+  display: block;
+  width: calc(100% - 20px);
+  height: 1px;
+  background: var(--ant-color-split);
+  content: '';
+}
+
+.ant-doc-main-sider-menu.ant-menu-inline > .ant-menu-item-group > .ant-menu-item-group-title {
+  margin-top: var(--ant-margin);
+  margin-bottom: var(--ant-margin);
+  font-size: var(--ant-font-size);
+}
+
+.ant-doc-main-sider-menu.ant-menu-inline.ant-menu-inline .ant-menu-item-group-title {
+  margin-left: var(--ant-margin-xxs);
+  padding-inline: 28px 12px !important;
+}
+
+.ant-doc-main-sider-menu.ant-menu-inline > .ant-menu-item {
+  padding-inline: 36px 12px !important;
+}
