@@ -12,7 +12,7 @@ async function generateLlms() {
   const pagesDir = path.resolve(repoRoot, 'playground', 'src', 'pages')
   const siteDir = OUTPUT_DIR
     ? path.resolve(repoRoot, OUTPUT_DIR)
-    : path.resolve(repoRoot, 'playground', 'dist')
+    : path.resolve(repoRoot, 'playground', 'public')
 
   const docsDirs = ['components', 'vue']
   const matchSuffix = '.en-US.md'

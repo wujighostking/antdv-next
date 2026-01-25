@@ -1,14 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/llms.txt",
-      "destination": "/llms.txt"
-    },
-    {
-      "source": "/llms-full.txt",
-      "destination": "/llms-full.txt"
-    },
-    {
       "source": "/:path*",
       "destination": "/index.html"
     }
