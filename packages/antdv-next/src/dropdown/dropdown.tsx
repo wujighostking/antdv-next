@@ -164,10 +164,18 @@ const Dropdown = defineComponent<
       if (props.disabled)
         return []
       // 兼容处理：将 contextMenu 转换为 contextmenu
-      return props.trigger?.map(t => (t === 'contextMenu' ? 'contextmenu' : t) as 'click' | 'hover' | 'contextmenu')
+      if (typeof props.trigger === 'string') {
+        if (props.trigger === 'contextmenu') {
+          return ['contextMenu']
+        }
+      }
+      if (Array.isArray(props.trigger)) {
+        return props.trigger?.map(t => (t === 'contextmenu' ? 'contextMenu' : t) as 'click' | 'hover' | 'contextMenu')
+      }
+      return props?.trigger
     })
 
-    const alignPoint = computed(() => !!triggerActions.value?.includes('contextmenu'))
+    const alignPoint = computed(() => !!triggerActions.value?.includes?.('contextMenu'))
 
     // =========================== Open ============================
     const mergedOpen = shallowRef(props.open ?? false)
