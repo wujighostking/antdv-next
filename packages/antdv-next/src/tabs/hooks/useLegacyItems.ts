@@ -28,9 +28,10 @@ function isTabPaneNode(node: any) {
   return type === TabPane || type?.name === 'ATabPane'
 }
 
-export default function useLegacyItems(items: () => TabsProps['items'] | undefined, slots: any) {
+export default function useLegacyItems(items: () => TabsProps['items'] | undefined, getSlots: () => any) {
   return computed<VcTab[]>(() => {
     const itemsValue = items()
+    const slots = getSlots()
     if (itemsValue && itemsValue.length) {
       return itemsValue.map((item, index) => convertItem(item, index, slots)) as VcTab[]
     }

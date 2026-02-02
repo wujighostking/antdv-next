@@ -197,7 +197,7 @@ const InternalTabs = defineComponent<
       }
     })
 
-    const mergedItems = useLegacyItems(() => props.items, slots)
+    const mergedItems = useLegacyItems(() => props.items, () => slots)
     const mergedProps = computed(() => {
       return {
         ...props,
