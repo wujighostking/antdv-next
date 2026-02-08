@@ -294,7 +294,7 @@ const amountOptions = [
               </a-form>
 
               <!-- 赞助列表 -->
-              <a-divider>感谢以下赞助者</a-divider>
+              <a-divider>感谢以下股东的赞助和支持</a-divider>
               <a-table
                 :columns="sponsorColumns"
                 :data-source="sponsorList"
