@@ -629,6 +629,4 @@ const PurePanel = genPurePanel(TreeSelect, 'popupAlign', (props: any) => omit(pr
 
 TreeSelect._InternalPanelDoNotUseOrYouWillBeFired = PurePanel
 
-export { TreeNode }
-
 export default TreeSelect
