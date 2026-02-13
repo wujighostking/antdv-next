@@ -19,6 +19,7 @@ demo:
 <demo-group>
 <demo src="./demo/basic.vue">基本</demo>
 <demo src="./demo/value.vue">受控组件</demo>
+<demo src="./demo/value-format.vue">值格式化</demo>
 <demo src="./demo/size.vue">三种大小</demo>
 <demo src="./demo/need-confirm.vue" version="5.14.0">选择确认</demo>
 <demo src="./demo/disabled.vue">禁用</demo>
@@ -50,6 +51,7 @@ demo:
 | disabled | 禁用全部操作 | boolean | false |  |
 | disabledTime | 不可选择的时间 | [DisabledTime](#disabledtime) | - | 4.19.0 |
 | format | 展示的时间格式 | string | `HH:mm:ss` |  |
+| valueFormat | 设置绑定值的格式。设置后 `value`、`defaultValue`、`v-model:value` 可使用格式化字符串，`change` 返回同格式字符串。示例：[值格式化](#time-picker-demo-value-format) | string | - |  |
 | getPopupContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | - |  |
 | hideDisabledOptions | 隐藏禁止选择的选项 | boolean | false |  |
 | hourStep | 小时选项间隔 | number | 1 |  |

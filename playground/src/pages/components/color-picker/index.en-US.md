@@ -28,6 +28,7 @@ Used when the user needs to make a customized color selection.
   <demo src="./demo/trigger.vue">Custom Trigger</demo>
   <demo src="./demo/trigger-event.vue">Custom Trigger Event</demo>
   <demo src="./demo/format.vue">Color Format</demo>
+  <demo src="./demo/value-format.vue">Value Format</demo>
   <demo src="./demo/presets.vue">Preset Colors</demo>
   <demo src="./demo/panel-render.vue">Custom Render Panel</demo>
   <demo src="./demo/style-class.vue">Custom semantic dom styling</demo>
@@ -63,6 +64,7 @@ Common props ref：[Common props](/docs/vue/common-props)
 | size | Setting the trigger size | SizeType | `middle` | - |
 | styles | Customize inline style for each semantic structure inside the component. Supports object or function. | ColorPickerStylesType | - | - |
 | trigger | ColorPicker trigger mode | TriggerType | `click` | - |
+| valueFormat | Set the output format of color value, supporting `hex`, `rgb`, and `hsb`. After setting, `v-model:value` returns strings in the selected format. Demo: [Value Format](#color-picker-demo-value-format) | ColorFormatType | - | - |
 | value | Value of color, support `v-model:value` | [ColorValueType](#colorvaluetype) | - | - |
 
 ### Events

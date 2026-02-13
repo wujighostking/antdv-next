@@ -18,6 +18,7 @@ By clicking the input box, you can select a time from a popup panel.
 <demo-group>
 <demo src="./demo/basic.vue">Basic</demo>
 <demo src="./demo/value.vue">Under Control</demo>
+<demo src="./demo/value-format.vue">Value Format</demo>
 <demo src="./demo/size.vue">Three Sizes</demo>
 <demo src="./demo/need-confirm.vue" version="5.14.0">Need Confirm</demo>
 <demo src="./demo/disabled.vue">disabled</demo>
@@ -49,6 +50,7 @@ Common props ref：[Common props](/docs/vue/common-props)
 | disabled | Determine whether the TimePicker is disabled | boolean | false |  |
 | disabledTime | To specify the time that cannot be selected | [DisabledTime](#disabledtime) | - | 4.19.0 |
 | format | To set the time format | string | `HH:mm:ss` |  |
+| valueFormat | Set the binding value format. After setting, `value`, `defaultValue`, and `v-model:value` can use formatted strings, and `change` returns strings in the same format. Demo: [Value Format](#time-picker-demo-value-format) | string | - |  |
 | getPopupContainer | To set the container of the floating layer, while the default is to create a div element in body | function(trigger) | - |  |
 | hideDisabledOptions | Whether hide the options that can not be selected | boolean | false |  |
 | hourStep | Interval between hours in picker | number | 1 |  |

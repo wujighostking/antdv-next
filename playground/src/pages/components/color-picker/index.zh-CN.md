@@ -29,6 +29,7 @@ group:
   <demo src="./demo/trigger.vue">自定义触发器</demo>
   <demo src="./demo/trigger-event.vue">自定义触发事件</demo>
   <demo src="./demo/format.vue">颜色编码</demo>
+  <demo src="./demo/value-format.vue">值格式化</demo>
   <demo src="./demo/presets.vue">预设颜色</demo>
   <demo src="./demo/panel-render.vue">自定义面板</demo>
   <demo src="./demo/style-class.vue">自定义语义结构的样式和类</demo>
@@ -64,6 +65,7 @@ group:
 | size | 设置触发器大小 | SizeType | `middle` | - |
 | styles | 用于自定义组件内部各语义化结构的行内 style，支持对象或函数 | ColorPickerStylesType | - | - |
 | trigger | 颜色选择器的触发模式 | TriggerType | `click` | - |
+| valueFormat | 设置颜色值的输出格式，支持 `hex`、`rgb`、`hsb`。设置后 `v-model:value` 返回对应格式的字符串。示例：[值格式化](#color-picker-demo-value-format) | ColorFormatType | - | - |
 | value | 颜色的值，支持 `v-model:value` | [ColorValueType](#colorvaluetype) | - | - |
 
 ### 事件 {#events}

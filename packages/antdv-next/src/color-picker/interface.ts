@@ -24,6 +24,7 @@ export const FORMAT_RGB = 'rgb'
 export const FORMAT_HSB = 'hsb'
 
 export type ColorFormatType = typeof FORMAT_HEX | typeof FORMAT_RGB | typeof FORMAT_HSB
+export type ColorValueFormatType = ColorFormatType | ((value: AggregationColor) => string)
 
 export interface PresetsItem {
   label: VueNode
@@ -90,6 +91,7 @@ export type ColorPickerStylesType = SemanticStylesType<
 export type ColorPickerProps
   = Omit<VcColorPickerProps, 'onChange' | 'onChangeComplete' | 'value'
   | 'defaultValue'
+  | 'valueFormat'
   | 'panelRender'
   | 'disabledAlpha'
   | 'components'> & {
@@ -102,6 +104,7 @@ export type ColorPickerProps
     trigger?: TriggerType
     format?: ColorFormatType
     defaultFormat?: ColorFormatType
+    valueFormat?: ColorValueFormatType
     allowClear?: boolean
     presets?: PresetsItem[]
     arrow?: boolean | { pointAtCenter?: boolean }

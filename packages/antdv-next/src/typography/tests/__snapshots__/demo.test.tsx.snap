@@ -1286,7 +1286,8 @@ exports[`typography demo > renders ellipsis correctly 1`] = `
     </span>
   </button>
   <div
-    class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line css-var-root"
+    aria-label=" Antdv Next, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. "
+    class="ant-typography ant-typography-ellipsis css-var-root"
   >
      Antdv Next, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. Ant Design, a design language for background applications, is refined by Ant UED Team. 
     <!---->
@@ -1313,7 +1314,8 @@ exports[`typography demo > renders ellipsis correctly 1`] = `
     <!---->
   </div>
   <span
-    class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line css-var-root"
+    aria-label=" Antdv Next, a design language for background applications, is refined by Ant UED Team. "
+    class="ant-typography ant-typography-ellipsis css-var-root"
     style="width: 200px;"
   >
      Antdv Next, a design language for background applications, is refined by Ant UED Team. 
@@ -1328,7 +1330,8 @@ exports[`typography demo > renders ellipsis correctly 1`] = `
   </span>
   <!---->
   <span
-    class="ant-typography ant-typography-ellipsis ant-typography-ellipsis-single-line css-var-root"
+    aria-label=" Antdv Next, a design language for background applications, is refined by Ant UED Team. "
+    class="ant-typography ant-typography-ellipsis css-var-root"
     style="width: 200px;"
   >
     <code>

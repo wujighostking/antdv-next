@@ -1209,6 +1209,7 @@ exports[`empty demo > renders config-provider correctly 1`] = `
     >
       <div
         class="css-var-root ant-table-css-var ant-table-wrapper"
+        data-allow-mismatch="true"
         style="margin-top: 8px;"
       >
         <div

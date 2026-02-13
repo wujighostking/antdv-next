@@ -29,7 +29,7 @@ import ColorPickerPanel from './ColorPickerPanel'
 import ColorTrigger from './components/ColorTrigger'
 import useModeColor from './hooks/useModeColor'
 import useStyle from './style'
-import { genAlphaColor, generateColor, getColorAlpha } from './util'
+import { formatColorValue, genAlphaColor, generateColor, getColorAlpha } from './util'
 
 const defaults = {
   trigger: 'click',
@@ -64,6 +64,7 @@ const ColorPicker = defineComponent<
       value,
       mode,
       format,
+      valueFormat,
       open,
       presets,
       disabledAlpha,
@@ -77,6 +78,7 @@ const ColorPicker = defineComponent<
       'value',
       'mode',
       'format',
+      'valueFormat',
       'open',
       'presets',
       'disabledAlpha',
@@ -189,7 +191,7 @@ const ColorPicker = defineComponent<
       cachedGradientColor.value = undefined
 
       emit('change', color, color.toCssString())
-      emit('update:value', color)
+      emit('update:value', formatColorValue(color, valueFormat.value))
 
       if (!changeFromPickerDrag) {
         onInternalChangeComplete(color)
@@ -233,7 +235,12 @@ const ColorPicker = defineComponent<
       setColor(cleared)
       emit('clear')
       emit('change', cleared, cleared.toCssString())
-      emit('update:value', cleared.toCssString())
+      emit(
+        'update:value',
+        valueFormat.value
+          ? formatColorValue(cleared, valueFormat.value)
+          : cleared.toCssString(),
+      )
     }
 
     expose({

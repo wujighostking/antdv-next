@@ -23,6 +23,7 @@ demo:
   <demo src="./demo/needConfirm.vue" version="5.14.0">选择确认</demo>
   <demo src="./demo/switchable.vue">切换不同的选择器</demo>
   <demo src="./demo/format.vue">日期格式</demo>
+  <demo src="./demo/value-format.vue">值格式化</demo>
   <demo src="./demo/time.vue">日期时间选择</demo>
   <demo src="./demo/mask.vue" version="5.14.0">格式对齐</demo>
   <demo src="./demo/date-range.vue" version="5.14.0">日期限定范围</demo>
@@ -95,6 +96,7 @@ dayjs.locale('zh-cn')
 | disabled | 禁用 | boolean | false | - |
 | disabledDate | 不可选择的日期 | (currentDate: dayjs, info: { from?: dayjs, type: Picker }) => boolean | - | - |
 | format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [dayjs#format](https://day.js.org/docs/zh-CN/display/format#%E6%94%AF%E6%8C%81%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%8D%A0%E4%BD%8D%E7%AC%A6%E5%88%97%E8%A1%A8)。示例：[自定义格式](#date-picker-demo-format) | [formatType](#formattype) | [@rc-component/picker](https://github.com/react-component/picker/blob/f512f18ed59d6791280d1c3d7d37abbb9867eb0b/src/utils/uiUtil.ts#L155-L177) | - |
+| valueFormat | 设置绑定值的格式。设置后 `value`、`defaultValue`、`v-model:value` 可使用格式化字符串，`change` 返回同格式字符串。示例：[值格式化](#date-picker-demo-value-format) | string | - | - |
 | order | 多选、范围时是否自动排序 | boolean | true | - |
 | ~~popupClassName~~ | 额外的弹出日历 className，使用 `classes.popup.root` 替代 | string | - | - |
 | preserveInvalidOnBlur | 失去焦点是否要清空输入框内无效内容 | boolean | false | - |

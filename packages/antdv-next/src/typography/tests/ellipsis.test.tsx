@@ -258,6 +258,9 @@ describe('typography.Ellipsis', () => {
       slots: { default: () => fullStr },
     })
 
+    await nextTick()
+    await waitFakeTimer(0, 1)
+
     expect(wrapper.findAll('.ant-typography-ellipsis-multiple-line').length).toBeGreaterThan(0)
     const lineClamp = wrapper.find('.ant-typography-ellipsis-multiple-line').element
     expect((lineClamp as HTMLDivElement).style.webkitLineClamp).toEqual('2')
@@ -490,7 +493,7 @@ describe('typography.Ellipsis', () => {
       globalThis.IntersectionObserver = originIntersectionObserver
     })
 
-    it('should calculate padding', () => {
+    it('should calculate padding', async () => {
       const wrapper = mount(Base, {
         props: {
           ellipsis: true,
@@ -498,6 +501,8 @@ describe('typography.Ellipsis', () => {
           style: { paddingTop: '12px', paddingBottom: '12px' },
         },
       })
+      await nextTick()
+      await waitFakeTimer(0, 1)
       expect(wrapper.find('.ant-typography-ellipsis-single-line').exists()).toBe(true)
     })
   })

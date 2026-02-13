@@ -10,6 +10,7 @@ import {
   h,
   nextTick,
   onBeforeUnmount,
+  onMounted,
   shallowRef,
   watch,
   watchEffect,
@@ -179,6 +180,7 @@ const Base = defineComponent<
     // ========================== Ellipsis ==========================
     const isLineClampSupport = shallowRef(false)
     const isTextOverflowSupport = shallowRef(false)
+    const supportCheckMounted = shallowRef(false)
 
     const isJsEllipsis = shallowRef(false)
     const isNativeEllipsis = shallowRef(false)
@@ -214,7 +216,14 @@ const Base = defineComponent<
       )
     })
 
+    onMounted(() => {
+      supportCheckMounted.value = true
+    })
+
     watchEffect(() => {
+      if (!supportCheckMounted.value)
+        return
+
       if (enableEllipsis.value && !needMeasureEllipsis.value) {
         isLineClampSupport.value = isStyleSupport('webkitLineClamp')
         isTextOverflowSupport.value = isStyleSupport('textOverflow')

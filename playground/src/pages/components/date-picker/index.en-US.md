@@ -21,6 +21,7 @@ By clicking the input box, you can select a date from a popup calendar.
   <demo src="./demo/needConfirm.vue" version="5.14.0">Need Confirm</demo>
   <demo src="./demo/switchable.vue">Switchable picker</demo>
   <demo src="./demo/format.vue">Date Format</demo>
+  <demo src="./demo/value-format.vue">Value Format</demo>
   <demo src="./demo/time.vue">Choose Time</demo>
   <demo src="./demo/mask.vue" version="5.14.0">Mask Format</demo>
   <demo src="./demo/date-range.vue" version="5.14.0">Limit Date Range</demo>
@@ -93,6 +94,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | disabled | Determine whether the DatePicker is disabled | boolean | false | - |
 | disabledDate | Specify the date that cannot be selected | (currentDate: dayjs, info: { from?: dayjs, type: Picker }) => boolean | - | - |
 | format | To set the date format, support multi-format matching when it is an array, display the first one shall prevail. refer to [dayjs#format](https://day.js.org/docs/en/display/format). for example: [Custom Format](#date-picker-demo-format) | [formatType](#formattype) | [@rc-component/picker](https://github.com/react-component/picker/blob/f512f18ed59d6791280d1c3d7d37abbb9867eb0b/src/utils/uiUtil.ts#L155-L177) | - |
+| valueFormat | Set the binding value format. After setting, `value`, `defaultValue`, and `v-model:value` can use formatted strings, and `change` returns strings in the same format. Demo: [Value Format](#date-picker-demo-value-format) | string | - | - |
 | order | Auto order date when multiple or range selection | boolean | true | - |
 | ~~popupClassName~~ | To customize the className of the popup calendar, use `classes.popup.root` instead | string | - | - |
 | preserveInvalidOnBlur | Not clean input on blur even when the typing is invalidate | boolean | false | - |

@@ -782,7 +782,7 @@ const InternalTable = defineComponent<
       const mergedScroll = props.scroll ?? contextScroll.value
 
       return (
-        <div ref={rootRef} class={wrapperCls} style={mergedStyle}>
+        <div ref={rootRef} class={wrapperCls} style={mergedStyle} data-allow-mismatch>
           <Spin spinning={false} {...(spinProps.value || {})}>
             {paginationNodes.top}
             <TableComp

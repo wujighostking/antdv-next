@@ -1,5 +1,5 @@
 import type { ColorGenInput } from '@v-c/color-picker'
-import type { ColorValueType } from './interface'
+import type { ColorValueFormatType, ColorValueType, LineGradientType } from './interface'
 
 import { Color as RcColor } from '@v-c/color-picker'
 import { AggregationColor } from './color'
@@ -9,6 +9,40 @@ export function generateColor(color: ColorGenInput<AggregationColor> | Exclude<C
     return color
   }
   return new AggregationColor(color)
+}
+
+function formatSingleColorValue(color: AggregationColor, valueFormat: ColorValueFormatType) {
+  if (typeof valueFormat === 'function') {
+    return valueFormat(color)
+  }
+
+  switch (valueFormat) {
+    case 'hex':
+      return color.toHexString()
+    case 'hsb':
+      return color.toHsbString()
+    case 'rgb':
+    default:
+      return color.toRgbString()
+  }
+}
+
+export function formatColorValue(
+  color: AggregationColor,
+  valueFormat?: ColorValueFormatType,
+): Exclude<ColorValueType, null> {
+  if (!valueFormat) {
+    return color
+  }
+
+  if (color.isGradient()) {
+    return color.getColors().map(({ color: itemColor, percent }) => ({
+      color: formatSingleColorValue(itemColor, valueFormat),
+      percent,
+    })) as LineGradientType
+  }
+
+  return formatSingleColorValue(color, valueFormat)
 }
 
 export const getRoundNumber = (value: number) => Math.round(Number(value || 0))

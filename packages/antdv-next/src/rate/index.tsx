@@ -129,8 +129,7 @@ const Rate = defineComponent<
           onHoverChange={(...args) => {
             emit('hoverChange', ...args)
           }}
-        >
-        </VcRate>
+        />
       )
     }
   },
